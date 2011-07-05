@@ -1,0 +1,156 @@
+\section{Injection de SQL}
+
+\subsection{Présentation de SQL}
+
+\begin{frame}[fragile]
+  \frametitle{Présentation de SQL}
+
+  \begin{columns}
+    \begin{column}{1.0\textwidth}<1->
+      \begin{itemize}
+      \item<1-> SQL est un langage permettant d'interroger ou modifier un système de
+      gestion de base de données (SGBD).
+      \item<2-> Il est proche du langage naturel : sélectionne le prénom
+      des personnes parmi tous les utilisateurs dont le nom
+      est STINNER donne par exemple ...
+      \item<3-> La requête SQL :
+\begin{verbatim}
+SELECT prenom FROM utilisateurs
+WHERE nom='STINNER';
+\end{verbatim}
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Injection de SQL}
+
+\begin{frame}
+  \frametitle{Injection de SQL}
+
+  \begin{columns}
+    \begin{column}{1.0\textwidth}<1->
+      \begin{itemize}
+      \item<1-> Beaucoup de sites web privilégient l'utilisation d'un SGBD
+      pour le stockage des données (plutôt que l'utilisation de fichiers).
+      \item<2-> Malheureusement, l'écriture des "requêtes" SQL est souvent
+      mal conçue et permet l'injection de SQL arbitraire.
+      \item<3-> L'injection de SQL est très dangereuse car elle autorise
+      l'accès en lecture et écriture à l'ensemble du SGBD, et dans certains
+      cas donne même accès au système de fichier !
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemples d'injection}
+
+  \begin{columns}
+    \begin{column}{1.0\textwidth}<1->
+      \begin{itemize}
+      \item<1-> SELECT login FROM users WHERE login='\$login' AND password='\$password'; \\
+      où \$login et \$password sont saisis par l'utilisateur et n'ont subi
+      aucun traitement.
+      \item<2-> En utilisant le mot de passe << xxx' OR 'a'='a >>, on outrepasse la
+      vérification du mot de passe.
+      \item<3-> Requête résultante : \\
+      SELECT login FROM users WHERE login='haypo' AND password='\emph{xxx' OR 'a='a}'; \\
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Trouver et exploiter les failles}
+
+\begin{frame}[fragile]
+  \frametitle{Requêtes à risque}
+
+  \begin{columns}
+    \begin{column}{1.0\textwidth}<1->
+      \begin{itemize}
+      \item<1-> \texttt{SELECT (...) WHERE champ='\emph{\$valeur}';}
+      \item<2-> \texttt{INSERT INTO table (a,b) \\
+      VALUES('\emph{\$valeura}', '\emph{\$valeurb}');}
+      \item<3-> Négligence des apostrophes (les pires) : \\
+      \texttt{SELECT titre, description \\
+      FROM livre WHERE id=\emph{\$id};}
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Faire parler les failles}
+
+  \begin{columns}
+    \begin{column}{1.0\textwidth}<1->
+      \begin{itemize}
+      \item<1-> Utiliser une chaîne vide, une chaîne très courte / longue.
+      \item<2-> Utiliser un nombre nul, négatif, trop grand / petit.
+      \item<3-> Souvent, une simple apostrophe permet de trouver une faille.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exploiter les failles}
+
+  \begin{columns}
+    \begin{column}{1.0\textwidth}<1->
+      \begin{itemize}
+      \item<1-> Outrepasser un test : \\
+      << SELECT ... WHERE id='\emph{xxx' OR 'a'='a}'; >>
+      \item<2-> Injecter une requête avec UNION : \\
+      << \texttt{SELECT ... WHERE id='\emph{xxx' UNION SELECT ... FROM table\#}';} >>
+      \item<3-> Fichiers : \\
+      << \texttt{SELECT ... \emph{INTO OUTFILE '/tmp/exploit'};} >> \\
+      << \texttt{SELECT \emph{LOAD\_FILE('/etc/passwd')};} >>
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Se protéger de l'injection SQL}
+
+\begin{frame}
+  \frametitle{Apostrophe et magic quote}
+  
+  \begin{columns}
+    \begin{column}{1.0\textwidth}<1->
+      \begin{itemize}
+      \item<1-> L'option magic\_quotes de PHP (actif par défaut)
+      ajoute un anti-slash devant les caractères suivants : << ' >>, << " >>, et les
+      caractères ayant un code ASCII inférieur à 32.
+      \item<2-> Surtout ne pas penser être protégé avec cette seule option.
+      D'ailleurs, souvent un stripslashes est utilisé avant un INSERT ou
+      UPDATE, et les requêtes du type << ... WHERE id=\$id; >>  sont toujours
+      exploitables.
+      \item<3-> On peut utiliser une écriture hexadécimale pour écrire une
+      chaîne de caractère sans apostrophe. Exemple : 0x2F6574632F706173737764
+      représente "/etc/passwd".
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Renforcer ses requêtes}
+  
+  \begin{columns}
+    \begin{column}{1.0\textwidth}<1->
+      \begin{itemize}
+      \item<1-> Utiliser des fonctions génériques qui vont générer les
+      requêtes plutôt que de les écrire à la main. En plus, il sera d'autant
+      plus facile d'utiliser un autre type de SGBD.
+      \item<2-> Utiliser une fonction qui échapper les caractères spéciaux.
+      Exemple : \texttt{mysql\_real\_escappe\_string()} du module MySQL
+      de PHP, ou \texttt{qstr()} de la bibliothèque AdoDB.
+      \item<3-> Rappel : considérer que ce qui vient de l'extérieur est
+      susceptible de venir d'un pirate, et indiquer les cas valides
+      plutôt que lister les cas invalides.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}

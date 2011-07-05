@@ -1,0 +1,30 @@
+<p>Recette des gaufres</p>
+
+<h2>Ingrédients :</h2>
+
+<ul type="square">
+  <li>125 gr de farine
+  </li><li>250 ml de lait
+  </li><li>50 gr de sucre
+  </li><li>100 gr de beurre fondu
+  </li><li>4 oeufs
+  </li><li>10 gr de sel
+  </li><li>1/4 de bâton vanille
+  </li><li>50 gr de sucre perlé
+</li></ul>
+
+<h2>Recette :</h2>
+
+<ul type="disc">
+  <li>Faites bouillir 1/4 de litre de lait avec 1/4 de bâton de vanille et laissez tiédir
+  </li><li>Dans un saladier, mettez 125gr de farine, mélangez-y 4 jaunes d'oeufs, une pincée de sel et une cuillèrée à café de sucre 
+  </li><li>Délayez-y le lait et ensuite 100 gr de beure fondu
+  </li><li>Travaillez
+le tout pour obtenir une pâte bien lisse dans laquelle vous mélangerez
+délicatement les 4 blancs d'oeufs battus en neige très ferme<br>
+  </li><li>Faites chauffer le fer à gaufre sur une position moyenne et beurrez-le légèrement
+  </li><li>Versez-y de la pâte et faites cuire et dorer des 2 côtés
+  </li><li>Saupoudrez de sucre perlé ou de sucre impalpable et servez <em>chaud</em> !
+</li></ul>
+
+<p style="text-align: center;"><a href="index.php">Retour à la liste des recettes</a></p>

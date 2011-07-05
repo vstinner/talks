@@ -1,0 +1,74 @@
+\section{PHP}
+
+\subsection{Présentation de PHP}
+
+\begin{frame}
+  \frametitle{Présentation de PHP}
+
+  \begin{columns}
+    \begin{column}{1.0\textwidth}<1->
+      \begin{itemize}
+      \item<1-> PHP est un langage interprété écrit par \textit{Rasmus Lerdorf} en 1994.
+      \item<2-> Il est très utilisé aujourd'hui dans les sites Internet (25~millions de site en 2005).
+      \item<3-> Il est apprécié pour sa facilité d'utilisation, la grande quantité des bibliothèques incluses,
+      son aspect "logiciel libre", et enfin sa grande communauté d'utilisateurs (documentation).
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Faiblesses de PHP}
+
+\begin{frame}
+  \frametitle{Failles PHP}
+
+  \begin{columns}
+    \begin{column}{1.0\textwidth}<1->
+      \begin{itemize}
+      \item<1-> PHP est souvent le premier langage appris par les concepteurs de site Internet.
+      \item<2-> La sécurité est souvent négligée par manque d'expérience, ou simplement par
+      manque d'intérêt.
+      \item<3-> Les failles de sécurité sont plus ou moins graves, mais trop souvent
+      on peut avec un peu d'expérience pénétrer dans un site sans grande difficulté.
+      \item<4-> Vieil adage : « 90\% des erreurs sont situées entre le clavier
+      et l'écran » :-)
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Exemples de failles}
+
+\begin{frame}
+  \frametitle{Exemples de failles}
+
+  \begin{columns}
+    \begin{column}{1.0\textwidth}<1->
+      \begin{itemize}
+      \item<1-> Formulaire vérifiant de manière incomplète les entrées des utilisateurs. 
+      \item<2-> Outil de téléchargement permettant de télécharger n'importe quel fichier.
+      \item<3-> Injection de SQL (détaillée plus tard).
+      \item<4-> etc. (la liste est longue)
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Limiter la casse}
+
+\begin{frame}
+  \frametitle{Limiter la casse}
+
+  \begin{columns}
+    \begin{column}{1.0\textwidth}<1->
+      \begin{itemize}
+      \item<1-> Supposer que ce qui vient de l'extérieur provient d'une
+      personne qui cherche à nous nuire.
+      \item<2-> Ne pas expliciter les cas à proscrire, mais plutôt les cas
+      à autoriser.
+      \item<3-> Concevoir l'architecture du système pour isoler les parties
+      sensibles.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}

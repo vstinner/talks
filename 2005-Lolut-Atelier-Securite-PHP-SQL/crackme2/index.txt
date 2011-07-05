@@ -1,0 +1,19 @@
+<p>Bienvenue sur la page d'accueil !</p>
+
+<h2>Articles :</h2>
+
+<ul>
+  <li><a href="index.php?article=gaufre.txt">Recette de gaufre</a></li>
+  <li><a href="index.php?article=picon.txt">Recette du picon</a></li>
+</ul>
+
+<h2>Administration :</h2>
+
+<form action="index.php" method="post">
+  <p>Mot de passe : <input type="text" name="motpasse" size="10" /></p>
+  <p><input type="submit" value="Identification" />
+</form>
+
+<h2>But de l'exercice :</h2>
+
+<p>Trouvez le mot de passe d'authentification ...</p>

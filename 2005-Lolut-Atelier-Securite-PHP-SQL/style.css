@@ -1,0 +1,35 @@
+html {
+  font-family: "Georgia", "Times", serif;
+  font-size: 12pt;
+  color: black;
+  background-color: white;
+  margin: 0.5em;
+}
+body {
+  padding: 0.5em;
+  border: 1px dotted #908FFF;
+  background-color: #EFEFEF;
+}
+h1 {
+  text-align: center;
+}
+em {
+  font-weight: bold;
+}  
+.article {
+  margin: 1ex 1em 1ex 1em;
+  padding: 0 1em 0 1em;
+  border: 1px dashed #0000A0;
+  background-color: #DFDFFF;
+  font-style: italic;
+}
+.erreur {
+  margin: 1ex 1em 1ex 1em;
+  padding: 0 1em 0 1em;
+  border: 3px dotted #FF0000;
+  background-color: #FFDFDF;
+  font-style: italic;
+}
+.article em, .erreur em {
+  font-weight: bold;
+}

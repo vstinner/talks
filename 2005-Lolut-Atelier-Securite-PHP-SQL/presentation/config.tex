@@ -1,0 +1,39 @@
+\mode<presentation>
+{
+  \usetheme{Copenhagen}
+%  \usetheme{Warsaw}
+  \usefonttheme{structurebold}
+}
+\setbeamercovered{dynamic}
+\usepackage[french]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{times}
+\usepackage{verbatim}
+\usepackage[T1]{fontenc}
+
+\title[Atelier sécurité]
+{Atelier sécurité - deuxième partie}
+
+\subtitle
+{Failles en PHP et injection SQL}
+
+\author
+{Victor Stinner}
+
+\institute[Lolut]
+{Club des utilisateurs de logiciels libres de l'UTBM}
+
+\date[Lolut A2005]
+{9 octobre 2005}
+
+% Redéfini la macro \emph
+\renewcommand{\emph}[1]{\textbf{\textcolor{red}{#1}}} 
+
+\beamerdefaultoverlayspecification{<+->}
+
+\AtBeginSection[]{
+    \frame{
+        \frametitle{Sommaire}
+        \tableofcontents[current]
+    }
+}

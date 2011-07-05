@@ -1,0 +1,16 @@
+<p>Recette du picon.</p>
+
+<h2>Ingrédients :</h2>
+
+<ul>
+<li>25 cl de bière (blonde)</li>
+<li>5 cl d'Amer Picon</li>
+</ul>
+
+<h2>Recette :</h2>
+
+<ul>
+<li>Dans un verre à bière, verser les ingrédients.</li>
+</ul>
+
+<p style="text-align: center;"><a href="index.php">Retour à la liste des recettes</a></p>
