@@ -1,0 +1,74 @@
+\section{Fusil}
+
+\subsection{Fusil}
+\frame
+{
+    \frametitle{Fusil the fuzzer}
+    \begin{columns}[c]
+        \column{2.7in}
+          \begin{itemize}
+          \item Python library
+          \item 20+ fuzzers
+          \item Found bugs in ClamAV, Gimp, GNU libc, Python, ...
+          \item Test command line programs
+          \end{itemize}
+
+        \column{2in}
+            \includegraphics[height=6cm]{Montparnasse}
+    \end{columns}
+}
+
+\subsection{Input vectors}
+\frame
+{
+    \frametitle{Input vectors}
+    \begin{columns}[c]
+        \column{2.7in}
+          \begin{itemize}
+          \item Command line
+          \item Files
+          \item Environment variables
+          \item TCP sockets
+          \end{itemize}
+
+        \column{2in}
+            \includegraphics[height=6cm]{Montparnasse}
+    \end{columns}
+}
+
+\subsection{Probes}
+\frame
+{
+    \frametitle{The different probes}
+    \begin{columns}[c]
+        \column{2.7in}
+            \begin{itemize}
+            \item Standard output / logs
+            \item Process exit status
+            \item Network ping
+            \item Integrated debugger (ptrace)
+            \end{itemize}
+
+        \column{2in}
+            \includegraphics[height=6cm]{Montparnasse}
+    \end{columns}
+}
+
+\subsection{Score}
+\frame
+{
+    \frametitle{Probes score system}
+    \begin{columns}[c]
+        \column{2.7in}
+            \begin{itemize}
+            \item Weighted sum of probe scores
+            \item -100\%: inputs rejected
+            \item 0\%: nothing special
+            \item 100\%: success (crash)
+            \end{itemize}
+
+        \column{2in}
+            \includegraphics[height=6cm]{Montparnasse}
+    \end{columns}
+}
+

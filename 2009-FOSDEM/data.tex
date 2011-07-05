@@ -1,0 +1,74 @@
+\section{Generate data}
+
+\subsection{Random data}
+\frame
+{
+    \frametitle{Generate pure random data}
+    \begin{columns}[c]
+        \column{2.3in}
+            \begin{itemize}
+            \item nc host port < /dev/urandom
+            \item Crashes softwares with no QA
+            \item ... with no security
+            \item ... with few users
+            \end{itemize}
+
+        \column{2.3in}
+            \includegraphics[width=2.3in]{AralShip}
+    \end{columns}
+}
+
+\subsection{Inject faults}
+\frame
+{
+    \frametitle{Inject faults in valid data}
+    \begin{columns}[c]
+        \column{2.3in}
+            \begin{itemize}
+            \item Invert bits, replace bytes, etc.
+            \item Truncate file
+            \item Crashes all audio/video players
+            \item Easiest technique
+            \end{itemize}
+
+        \column{2.3in}
+            \includegraphics[width=2.3in]{AralShip}
+    \end{columns}
+}
+
+\subsection{Data model}
+\frame
+{
+    \frametitle{Generate data using a model}
+    \begin{columns}[c]
+        \column{2.3in}
+            \begin{itemize}
+            \item Generate random data
+            \item ... respecting the specifications
+            \item Deeper tests
+            \item Needs specifications
+            \end{itemize}
+
+        \column{2.3in}
+            \includegraphics[width=2.3in]{AralShip}
+    \end{columns}
+}
+
+\subsection{Python fuzzer}
+\frame
+{
+    \frametitle{Example of the Python fuzzer}
+    \begin{columns}[c]
+        \column{2.3in}
+            \begin{itemize}
+            \item List Python modules
+            \item List module functions
+            \item Random function calls
+            \item Random argument number and types
+            \end{itemize}
+
+        \column{2.3in}
+            \includegraphics[width=2.3in]{AralShip}
+    \end{columns}
+}
+
