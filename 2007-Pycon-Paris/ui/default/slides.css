@@ -1,0 +1,6 @@
+@import url(s5-core.css); /* required to make the slide show run at all */
+@import url(framing.css); /* sets basic placement and size of slide components */
+@import url(pretty.css);  /* stuff that makes the slides look better than blah */
+.droite { float: right; border: 2px solid black; margin: 0.3em; }
+.python { font-family: monospace; font-size: 80%; }
+

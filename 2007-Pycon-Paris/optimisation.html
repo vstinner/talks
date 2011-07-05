@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Optimiser son code</title>
+<!-- metadata -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="S5" />
+<meta name="version" content="S5 1.2a2" />
+<meta name="author" content="Victor Stinner" />
+<!-- configuration parameters -->
+<meta name="defaultView" content="slideshow" />
+<meta name="controlVis" content="hidden" />
+<!-- style sheet links -->
+<link rel="stylesheet" href="ui/default/slides.css" type="text/css" media="projection" id="slideProj" />
+<link rel="stylesheet" href="ui/default/outline.css" type="text/css" media="screen" id="outlineStyle" />
+<link rel="stylesheet" href="ui/default/print.css" type="text/css" media="print" id="slidePrint" />
+<link rel="stylesheet" href="ui/default/opera.css" type="text/css" media="projection" id="operaFix" />
+<!-- embedded styles -->
+<style type="text/css" media="all">
+.imgcon {width: 525px; margin: 0 auto; padding: 0; text-align: center;}
+#anim {width: 270px; height: 320px; position: relative; margin-top: 0.5em;}
+#anim img {position: absolute; top: 42px; left: 24px;}
+img#me01 {top: 0; left: 0;}
+img#me02 {left: 23px;}
+img#me04 {top: 44px;}
+img#me05 {top: 43px;left: 36px;}
+</style>
+<!-- S5 JS -->
+<script src="ui/default/slides.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="layout">
+<div id="controls"><!-- DO NOT EDIT --></div>
+<div id="currentSlide"><!-- DO NOT EDIT•• --></div>
+<div id="header"></div>
+<div id="footer">
+<h1>Journées Python 2007</h1>
+<h2>Victor Stinner</h2>
+</div>
+</div>
+
+
+<div class="slide">
+<h1>Optimiser son code</h1>
+<h3><a href="http://www.haypocalc.com/" rel="external">Victor Stinner</a></h3>
+<h4><a href="http://journees.afpy.org/" rel="external">Journées Python 2007</a></h3>
+<div class="handout"></div>
+</div>
+
+
+<div class="slide">
+<h1>Savoir quand optimiser</h1>
+<img src="montres.jpg" class="droite" />
+<ul>
+  <li>Ne pas optimiser avant que le programme ne fonctionne</li>
+  <li>Ne pas optimiser si le programme est déjà rapide</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Ne pas optimiser</h1>
+<ul>
+  <li>Optimiser peut obfuscer le code</li>
+  <li>Optimiser peut introduire des erreurs</li>
+  <li>Ne pas optimiser pour un gain inférieur à 5%</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Autres arguments</h1>
+<ul class="incremental show-first">
+  <li>Optimiser rend impuissant</li>
+  <li>Optimiser mange des enfants</li>
+  <li>Optimiser vote Front National</li>
+  <li>Optimiser viole des grand mères</li>
+  <li>Mais nan, je déconne !</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Savoir quoi optimiser</h1>
+<img src="hotshot.jpg" class="droite" />
+<ul>
+  <li>Utiliser le <i>profiler</i> « hotshot »</li>
+  <li>Mesure le temps passé sur chaque ligne du code</li>
+  <li>(démonstration avec hachoir-metadata)</li>
+  <li>Savoir interpréter les résultats</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Astuces</h1>
+<ul>
+  <li>Tester plusieurs algorithmes</li>
+  <li>Limiter les appels aux fonctions lentes</li>
+  <li>Utilisation d'un cache</li>
+  <li>Réécrire le code critique en C ou C++</li>
+</ul>
+</div>
+
+
+
+
+</div> <!-- class="presentation" -->
+</body>
+</html>
+

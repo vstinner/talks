@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Écriture d'un module Python</title>
+<!-- metadata -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="S5" />
+<meta name="version" content="S5 1.2a2" />
+<meta name="author" content="Victor Stinner" />
+<!-- configuration parameters -->
+<meta name="defaultView" content="slideshow" />
+<meta name="controlVis" content="hidden" />
+<!-- style sheet links -->
+<link rel="stylesheet" href="ui/default/slides.css" type="text/css" media="projection" id="slideProj" />
+<link rel="stylesheet" href="ui/default/outline.css" type="text/css" media="screen" id="outlineStyle" />
+<link rel="stylesheet" href="ui/default/print.css" type="text/css" media="print" id="slidePrint" />
+<link rel="stylesheet" href="ui/default/opera.css" type="text/css" media="projection" id="operaFix" />
+<!-- embedded styles -->
+<style type="text/css" media="all">
+.imgcon {width: 525px; margin: 0 auto; padding: 0; text-align: center;}
+#anim {width: 270px; height: 320px; position: relative; margin-top: 0.5em;}
+#anim img {position: absolute; top: 42px; left: 24px;}
+img#me01 {top: 0; left: 0;}
+img#me02 {left: 23px;}
+img#me04 {top: 44px;}
+img#me05 {top: 43px;left: 36px;}
+</style>
+<!-- S5 JS -->
+<script src="ui/default/slides.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="layout">
+<div id="controls"><!-- DO NOT EDIT --></div>
+<div id="currentSlide"><!-- DO NOT EDIT•• --></div>
+<div id="header"></div>
+<div id="footer">
+<h1>Journées Python 2007</h1>
+<h2>Victor Stinner</h2>
+</div>
+</div>
+
+<div class="slide">
+<h1>Écriture d'un module Python</h1>
+<h3><a href="http://www.haypocalc.com/" rel="external">Victor Stinner</a></h3>
+<h4><a href="http://journees.afpy.org/" rel="external">Journées Python 2007</a></h3>
+<div class="handout"></div>
+</div>
+
+
+<div class="slide">
+<h1>Code modulaire</h1>
+<img src="legos.jpg" class="droite" />
+<ul>
+  <li>Quand le code s'allonge, ça sent la redondance</li>
+  <li>Un code court se relit plus facilement</li>
+  <li>Maintenance = 50% de la vie du projet</li>
+  <li>Diviser pour régner</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Module Python</h1>
+<img src="livres.jpg" class="droite" />
+<ul>
+  <li>« Bibliothèque », « librairie » (franglais !) ou « module »</li>
+  <li>Bibliothèque Python : dossier contenant un fichier « __init__.py » et des fichiers « .py »</li>
+  <li>Nom : lettre minuscule ou majuscule (ni « _ », ni chiffre, ni espace)</li>
+  <li>Consulter la <a href="file:///home/haypo/s5/bonnes_pratiques.html" rel="external">liste des modules Python</a></li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Préparer le terrain</h1>
+<img src="terrain.jpg" class="droite" />
+<ul>
+  <li>Organisation des dossiers/fichiers</li>
+  <li>Limiter les interdépendences</li>
+  <li>Installer une bibliothèque : setup.py</li>
+  <li>Copié dans le dossier /usr/lib/pythonX.Y/site-packages/</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Exemple de module</h1>
+<ul>
+  <li>(Exemple : <a href="ex_module/">module mademo</a>)</li>
+</ul>
+</div>
+
+
+</div> <!-- class="presentation" -->
+</body>
+</html>
+

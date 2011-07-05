@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Style du code Python</title>
+<!-- metadata -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="S5" />
+<meta name="version" content="S5 1.2a2" />
+<meta name="author" content="Victor Stinner" />
+<!-- configuration parameters -->
+<meta name="defaultView" content="slideshow" />
+<meta name="controlVis" content="hidden" />
+<!-- style sheet links -->
+<link rel="stylesheet" href="ui/default/slides.css" type="text/css" media="projection" id="slideProj" />
+<link rel="stylesheet" href="ui/default/outline.css" type="text/css" media="screen" id="outlineStyle" />
+<link rel="stylesheet" href="ui/default/print.css" type="text/css" media="print" id="slidePrint" />
+<link rel="stylesheet" href="ui/default/opera.css" type="text/css" media="projection" id="operaFix" />
+<!-- embedded styles -->
+<style type="text/css" media="all">
+.imgcon {width: 525px; margin: 0 auto; padding: 0; text-align: center;}
+#anim {width: 270px; height: 320px; position: relative; margin-top: 0.5em;}
+#anim img {position: absolute; top: 42px; left: 24px;}
+img#me01 {top: 0; left: 0;}
+img#me02 {left: 23px;}
+img#me04 {top: 44px;}
+img#me05 {top: 43px;left: 36px;}
+</style>
+<!-- S5 JS -->
+<script src="ui/default/slides.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="layout">
+<div id="controls"><!-- DO NOT EDIT --></div>
+<div id="currentSlide"><!-- DO NOT EDIT•• --></div>
+<div id="header"></div>
+<div id="footer">
+<h1>Journées Python 2007</h1>
+<h2>Victor Stinner</h2>
+</div>
+</div>
+
+<div class="presentation">
+
+<div class="slide">
+<h1>Style du code Python</h1>
+<h3><a href="http://www.haypocalc.com/" rel="external">Victor Stinner</a></h3>
+<h4><a href="http://journees.afpy.org/" rel="external">Journées Python 2007</a></h3>
+<div class="handout"></div>
+</div>
+
+<div class="slide">
+<h1>Style du code</h1>
+<img src="vim.jpg" class="droite" />
+<ul>
+  <li>Indentation : 4 espaces</li>
+  <li>Éditeur : vim</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Taille idéale</h1>
+<img src="enlarge.jpg" class="droite" />
+<ul>
+  <li>Fonction : 250 lignes maximum</li>
+  <li>Fichier : 1000 lignes maximum</li>
+  <li>Si c'est plus long : redécouper</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Nom de variables explicites</h1>
+<img src="explicite.jpg" class="droite" />
+<ul>
+  <li>Pas de nom de variable d'un ou deux caractères</li>
+  <li>Éviter i, j, k : utiliser page_index, nb_test, obj_index</li>
+  <li>Éviter a1, a2, a3, a4 : utiliser un tableau</li>
+  <li>Éviter obj_id, obj_name, obj_attr : utiliser une classe</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Convention de nommage</h1>
+<img src="mots.jpg" class="droite" />
+<ul>
+  <li>variable : nom_de_variable</li>
+  <li>fonction : faireQuelqueChose()</li>
+  <li>classe : MaSuperClasse()</li>
+  <li>constante : INVARIANT</li>
+  <li>Exemple :<br /><span class="python">def creeTruc(): truc = Truc(TRUC)</span></li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Espaces</h1>
+<img src="galaxie.jpg" class="droite" />
+<ul>
+  <li>Espace : <span class="python">a_=_calcule(b,_c=d)</span></li>
+  <li>Espace : <span class="python">def pouet(a,_b,_c=2):_return 0</span></li>
+  <li>Et pas : <span class="python">a=calcule(b,_c_=_d)</span></li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Style du code : Conclusion</h1>
+<ul>
+  <li>Mon style est juste moins pire qu'un autre</li>
+  <li>Il faut choisir un style et s'y tenir</li>
+  <li><a href="http://www.logilab.org/857" rel="external">pylint</a> permet de valider le style</li>
+  <li>Lire la <a href="http://www.python.org/dev/peps/pep-0008/" rel="external">PEP 8</a> (<i>Style Guide for Python Code</i>) pour les détails</li>
+</ul>
+</div>
+
+</div> <!-- class="presentation" -->
+</body>
+</html>

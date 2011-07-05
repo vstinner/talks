@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Code tolérant aux erreurs</title>
+<!-- metadata -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="S5" />
+<meta name="version" content="S5 1.2a2" />
+<meta name="author" content="Victor Stinner" />
+<!-- configuration parameters -->
+<meta name="defaultView" content="slideshow" />
+<meta name="controlVis" content="hidden" />
+<!-- style sheet links -->
+<link rel="stylesheet" href="ui/default/slides.css" type="text/css" media="projection" id="slideProj" />
+<link rel="stylesheet" href="ui/default/outline.css" type="text/css" media="screen" id="outlineStyle" />
+<link rel="stylesheet" href="ui/default/print.css" type="text/css" media="print" id="slidePrint" />
+<link rel="stylesheet" href="ui/default/opera.css" type="text/css" media="projection" id="operaFix" />
+<!-- embedded styles -->
+<style type="text/css" media="all">
+.imgcon {width: 525px; margin: 0 auto; padding: 0; text-align: center;}
+#anim {width: 270px; height: 320px; position: relative; margin-top: 0.5em;}
+#anim img {position: absolute; top: 42px; left: 24px;}
+img#me01 {top: 0; left: 0;}
+img#me02 {left: 23px;}
+img#me04 {top: 44px;}
+img#me05 {top: 43px;left: 36px;}
+</style>
+<!-- S5 JS -->
+<script src="ui/default/slides.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="layout">
+<div id="controls"><!-- DO NOT EDIT --></div>
+<div id="currentSlide"><!-- DO NOT EDIT•• --></div>
+<div id="header"></div>
+<div id="footer">
+<h1>Journées Python 2007</h1>
+<h2>Victor Stinner</h2>
+</div>
+</div>
+
+
+<div class="slide">
+<h1>Code tolérant aux erreurs</h1>
+<h3><a href="http://www.haypocalc.com/" rel="external">Victor Stinner</a></h3>
+<h4><a href="http://journees.afpy.org/" rel="external">Journées Python 2007</a></h3>
+<div class="handout"></div>
+</div>
+
+
+<div class="slide">
+<h1>C'est quoi un bogue ?</h1>
+<img src="bogue.jpg" class="droite" />
+<p><i>Comportement inattendu du programme</i></p>
+<ul>
+  <li>Conséquences d'un bogue</li>
+  <li>Origine des bogues</li>
+  <li>Corriger les bogues</li>
+  <li>Tolérance aux erreurs</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Perte de données</h1>
+<img src="bebe.jpg" class="droite" />
+<ul>
+  <li>Perte du travail en cours</li>
+  <li>Corruption des données</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Épuisement des ressources</h1>
+<img src="fin_marathon.jpg" class="droite" />
+<ul>
+  <li>Processeur</li>
+  <li>Mémoire</li>
+  <li>Disque dur</li>
+  <li>Réseau</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Échec de la politique de sécurité</h1>
+<img src="policiers.jpg" class="droite" />
+<ul>
+  <li>Usurpation d'identité</li>
+  <li>Dénis de service</li>
+  <li>Vol de données</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Gestion bancale des erreurs</h1>
+<img src="banc.jpg" class="droite" />
+<ul>
+  <li>Oubli de la vérification du code d'erreur</li>
+  <li>Erreur dans le code gérant les erreurs (<b>aïe</b>&nbsp;!)</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Erreur arithmétique</h1>
+<img src="equation.jpg" class="droite" />
+<ul>
+  <li>Dépassement de capacité d'un entier ou d'un réel </li>
+  <li>Division par zéro</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Autres origines</h1>
+<img src="infini.jpg" class="droite" />
+<ul>
+  <li>Boucle infinie</li>
+  <li>Appel récursif dans condition d'arrêt</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Outils d'analyse statique</h1>
+<img src="cornflakes.jpg" class="droite" />
+<ul>
+  <li><a href="http://pychecker.sourceforge.net/" rel="external">pychecker</a></li>
+  <li><a href="http://www.divmod.org/projects/pyflakes" rel="external">pyflakes</a></li>
+  <li><a href="http://www.logilab.org/857" rel="external">pylint</a></li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>assert... ou pas</h1>
+<ul>
+  <li>assert : Est-ce une bonne idée ?</li>
+  <li>Peut-on garantir que le programme fonctionne sans assert ?</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Tolérance aux erreurs</h1>
+<ul>
+  <li>Utiliser try/except sur de gros blocs</li>
+  <li>Ignorer les erreurs mineures</li>
+  <li>ERRORS = (ValueError, LookupError, ...)</li>
+  <li>try:<br />&nbsp;&nbsp;...<br />except ERRORS, err:<br />&nbsp;&nbsp;logError(err)</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Générer des erreurs</h1>
+<img src="fuzzing.jpg" class="droite" />
+<ul>
+  <li>Entrer des données invalides pour générer des erreurs</li>
+  <li>Technique du fuzzing</li>
+  <li>Voir le <a href="http://fusil.hachoir.org" rel="external">projet fusil</a></li>
+</ul>
+</div>
+
+
+</div> <!-- class="presentation" -->
+</body>
+</html>
+

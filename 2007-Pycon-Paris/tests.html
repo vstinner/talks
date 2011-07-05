@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Tests automatisés</title>
+<!-- metadata -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="S5" />
+<meta name="version" content="S5 1.2a2" />
+<meta name="author" content="Victor Stinner" />
+<!-- configuration parameters -->
+<meta name="defaultView" content="slideshow" />
+<meta name="controlVis" content="hidden" />
+<!-- style sheet links -->
+<link rel="stylesheet" href="ui/default/slides.css" type="text/css" media="projection" id="slideProj" />
+<link rel="stylesheet" href="ui/default/outline.css" type="text/css" media="screen" id="outlineStyle" />
+<link rel="stylesheet" href="ui/default/print.css" type="text/css" media="print" id="slidePrint" />
+<link rel="stylesheet" href="ui/default/opera.css" type="text/css" media="projection" id="operaFix" />
+<!-- embedded styles -->
+<style type="text/css" media="all">
+.imgcon {width: 525px; margin: 0 auto; padding: 0; text-align: center;}
+#anim {width: 270px; height: 320px; position: relative; margin-top: 0.5em;}
+#anim img {position: absolute; top: 42px; left: 24px;}
+img#me01 {top: 0; left: 0;}
+img#me02 {left: 23px;}
+img#me04 {top: 44px;}
+img#me05 {top: 43px;left: 36px;}
+</style>
+<!-- S5 JS -->
+<script src="ui/default/slides.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="layout">
+<div id="controls"><!-- DO NOT EDIT --></div>
+<div id="currentSlide"><!-- DO NOT EDIT•• --></div>
+<div id="header"></div>
+<div id="footer">
+<h1>Journées Python 2007</h1>
+<h2>Victor Stinner</h2>
+</div>
+</div>
+
+
+<div class="slide">
+<h1>Tests automatisés</h1>
+<h3><a href="http://www.haypocalc.com/" rel="external">Victor Stinner</a></h3>
+<h4><a href="http://journees.afpy.org/" rel="external">Journées Python 2007</a></h3>
+<div class="handout"></div>
+</div>
+
+
+<div class="slide">
+<h1>doctest</h1>
+<ul>
+  <li>Mélange entre la documentation et les tests</li>
+  <li>Tests écrits dans les commentaires</li>
+  <li>Tests écrits sous forme de documentation</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>doctest</h1>
+<ul>
+  <li>Syntaxe intuitive et efficace</li>
+  <li>Tests proche du code et à jour</li>
+  <li>Exemple : <a href="http://hachoir.org/browser/trunk/hachoir-core/hachoir_core/bits.py" rel="external">hachoir_core.bits</a></li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Tests unitaires</h1>
+<ul>
+  <li>Tests utilisés pour les fonctions simples</li>
+  <li>Réduit aux fonctions sans effet de bord</li>
+  <li>Je préfère les écrire sous forme de doctests</li>
+  <li>Intérêt limité car ne s'appliquent qu'à peu de cas</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Tests fonctionnels</h1>
+<ul>
+  <li>Teste une fonctionnalité du programme</li>
+  <li>Utilise une bibliothèque ou directement le programme</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Tests fonctionnels</h1>
+<ul>
+  <li>Désavantage : un bogue peut impacter de nombreux tests</li>
+  <li>(et donc) : difficulté pour isoler le bogue</li>
+  <li>Avantage : meilleure couverture du code (que les tests unitaires)</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Couverture de code</h1>
+<ul>
+  <li>Mesure chaque ligne exécutée et le nombre de <i>hits</i></li>
+  <li>Permet de trouver le code mort (non testé)</li>
+  <li>Outil <a href="http://champiland.homelinux.net/trace2html/" rel="external">trace2html</a> écrit par <i>Olivier Grisel</i></li>
+  <li>Démo. : couverture de code d'Hachoir<br />
+  (script <a href="http://hachoir.org/browser/trunk/coverage_test.sh" rel="external">couverture_code.sh</a>)</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Mise en place dans Hachoir</h1>
+<ul>
+  <li>Besoin de tests : bogues trouvés juste après une release</li>
+  <li>Partie doctests</li>
+  <li>Création d'un jeu de (fichiers de) test</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Mise en place dans Hachoir</h1>
+<ul>
+  <li><a href="http://hachoir.org/browser/trunk/hachoir-parser/tests/run_testcase.py" rel="external">Tests hachoir_parser</a></li>
+  <li><a href="http://hachoir.org/browser/trunk/hachoir-metadata/run_testcase.py" rel="external">Tests hachoir_metadata</a></li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Mise en place dans Hachoir</h1>
+<ul>
+  <li>Écriture d'un script de test global (test_all.sh)</li>
+  <li>Lancement quotidient des tests à 5h23 avec cron</li>
+  <li>Mes impressions sur les tests</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Mise en place dans NuFW</h1>
+<ul>
+  <li>Expression du besoin : beaucoup de code (22000 lignes), peu de monde pour le tester</li>
+  <li>Pare-feu authentifiant écrit en langage C</li>
+  <li>Choix entre des tests manuels ou des tests automatisés</li>
+  <li>Maquette Python avec le module unittest</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Mise en place dans NuFW</h1>
+<ul>
+  <li>Consulter le <a href="http://software.inl.fr/trac/trac.cgi/browser/mirror/edenwall/nufw/trunk/nufw/tests" rel="external">dossier tests</a></li>
+  <li>Écriture d'outils pour les tests</li>
+  <li>Lancement de tous les tests dans un ordre aléatoire</li>
+  <li>Mise en place dans un buildbot : envoi d'un email a l'auteur du bogue</li>
+</ul>
+</div>
+
+
+</div> <!-- class="presentation" -->
+</body>
+</html>
+

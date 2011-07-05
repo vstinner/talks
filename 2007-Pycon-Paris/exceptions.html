@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Gestion des exceptions avec Python</title>
+<!-- metadata -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="S5" />
+<meta name="version" content="S5 1.2a2" />
+<meta name="author" content="Victor Stinner" />
+<!-- configuration parameters -->
+<meta name="defaultView" content="slideshow" />
+<meta name="controlVis" content="hidden" />
+<!-- style sheet links -->
+<link rel="stylesheet" href="ui/default/slides.css" type="text/css" media="projection" id="slideProj" />
+<link rel="stylesheet" href="ui/default/outline.css" type="text/css" media="screen" id="outlineStyle" />
+<link rel="stylesheet" href="ui/default/print.css" type="text/css" media="print" id="slidePrint" />
+<link rel="stylesheet" href="ui/default/opera.css" type="text/css" media="projection" id="operaFix" />
+<!-- embedded styles -->
+<style type="text/css" media="all">
+.imgcon {width: 525px; margin: 0 auto; padding: 0; text-align: center;}
+#anim {width: 270px; height: 320px; position: relative; margin-top: 0.5em;}
+#anim img {position: absolute; top: 42px; left: 24px;}
+img#me01 {top: 0; left: 0;}
+img#me02 {left: 23px;}
+img#me04 {top: 44px;}
+img#me05 {top: 43px;left: 36px;}
+</style>
+<!-- S5 JS -->
+<script src="ui/default/slides.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="layout">
+<div id="controls"><!-- DO NOT EDIT --></div>
+<div id="currentSlide"><!-- DO NOT EDIT•• --></div>
+<div id="header"></div>
+<div id="footer">
+<h1>Journées Python 2007</h1>
+<h2>Victor Stinner</h2>
+</div>
+</div>
+
+
+<div class="slide">
+<h1>Gestion des exceptions en Python</h1>
+<h3><a href="http://www.haypocalc.com/" rel="external">Victor Stinner</a></h3>
+<h4><a href="http://journees.afpy.org/" rel="external">Journées Python 2007</a></h3>
+<div class="handout"></div>
+</div>
+
+
+<div class="slide">
+<h1>Utilité des exceptions</h1>
+<ul>
+  <li>(Exemples C : <a href="ex_exception/exemple.c">exemple.c</a> et <a href="ex_exception/exemple_corrige.c">exemple_corrige.c</a>)</li>
+  <li>(Exemples Python : <a href="ex_exception/exemple.py">exemple.py</a> et <a href="ex_exception/exemple_corrige.py">exemple_corrige.py</a>)</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Hierarchie des exceptions</h1>
+<img src="arbre.jpg" class="droite" />
+<ul>
+  <li>La classe Exception regroupe (presque) toutes les exceptions Python</li>
+  <li>Exceptions génériques : ArithmeticError, LookupError, TypeError, ValueError</li>
+  <li>Consulter la <a href="http://docs.python.org/lib/module-exceptions.html" rel="external">hierarchie complète des exceptions</a></li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Exceptions courantes</h1>
+<ul>
+  <li>ValueError : valeur invalide</li>
+  <li>TypeError : type invalide</li>
+  <li>ZeroDivisionError : division par zéro</li>
+  <li>IndexError / KeyError : index/clé inexistant (liste/dictionnaire)</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Exceptions systèmes</h1>
+<ul>
+  <li>OSError : déclanchée par les fonctions os.*()</li>
+  <li>IOError : erreur lors de l'accès à un fichier ou un dossier</li>
+  <li>EOFError : fin du fichier lu</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Exceptions Python</h1>
+<img src="python.jpg" class="droite" />
+<ul>
+  <li>NameError : variable non définie</li>
+  <li>AttributeError : attribut non défini</li>
+  <li>SyntaxError : syntaxe invalide</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Exceptions spéciales</h1>
+<ul>
+  <li>KeyboardInterrupt : signaux SIGINT et SIGTERM (CTRL+C)</li>
+  <li>SystemExit : fonction sys.exit()</li>
+  <li>StopIteration : fin d'un générateur</li>
+  <li>MemoryError : Toute la mémoire allouable est utilisée</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Changements Python 2.5</h1>
+<ul>
+  <li>KeyboardInterrupt n'hérite plus de StandardError</li>
+  <li>KeyboardInterrupt et SystemExit n'héritent plus de Exception mais de BaseException</li>
+</ul>
+</div>
+
+
+</div> <!-- class="presentation" -->
+</body>
+</html>
+
