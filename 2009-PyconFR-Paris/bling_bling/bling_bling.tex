@@ -1,0 +1,304 @@
+\documentclass[handout]{beamer}
+
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+  \usefonttheme{structurebold}
+}
+\setbeamercovered{dynamic}
+\usepackage[utf8]{inputenc}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+
+\title[Fonctionnalités sexy de Python]{Python bling bling}
+
+\author{Victor Stinner}
+
+\date{Pycon FR, Paris, mai 2009}
+
+\beamerdefaultoverlayspecification{<+->}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\section{Syntaxe}
+
+\subsection{Opérateurs}
+\frame
+{
+\begin{columns}[c]
+\column{0.4\textwidth}
+    \includegraphics[height=0.9\textheight]{blingbling}
+\column{0.6\textwidth}
+    \begin{itemize}
+    \item 1 < x <= 10
+    \item 0 <= x < y <= 20
+    \item a, b = b, a + b \# Fibonacci
+    \item color = "red" if load > 0.8 else "green"
+    \end{itemize}
+\end{columns}
+}
+
+\subsection{Slices}
+\begin{frame}[fragile]
+\begin{columns}[c]
+\column{0.4\textwidth}
+    \includegraphics[height=0.9\textheight]{blingbling}
+\column{0.6\textwidth}
+\begin{verbatim}
+>>> carres = [1, 4, 9, 16, 25]
+>>> carres[1:-1]
+[4, 9, 16]
+>>> carres[::2]
+[1, 9, 25]
+>>> carres[::-1]
+[25, 16, 9, 4, 1]
+\end{verbatim}
+\end{columns}
+\end{frame}
+
+\section{Itérateurs}
+
+\subsection{Utilisation}
+\begin{frame}
+\begin{columns}[c]
+\column{0.6\textwidth}
+    \begin{itemize}
+    \item str, unicode, list, tuple, dict, set, <fichier>, ...
+    \item dict.iterkeys(), dict.itervalues(), dict.iteritems()
+    \item iter(object) ou "for element in object: ..."
+    \item Votre objet : méthode \_\_iter\_\_()
+    \end{itemize}
+\column{0.4\textwidth}
+    \includegraphics[width=\textwidth]{holygrail}
+\end{columns}
+\end{frame}
+
+\subsection{Outils}
+\begin{frame}[fragile]
+    \begin{columns}[c]
+    \column{0.6\textwidth}
+        \begin{verbatim}
+>>> list(enumerate("abc"))
+[(0, 'a'), (1, 'b'), (2, 'c')]
+>>> list(zip("ab", "XY"))
+[('a', 'X'), ('b', 'Y')]
+>>> gen = itertools.count()
+>>> gen.next(), gen.next()
+(0, 1)
+        \end{verbatim}
+    \column{0.4\textwidth}
+        \includegraphics[width=\textwidth]{holygrail}
+    \end{columns}
+\end{frame}
+
+\section{Générateurs}
+
+\subsection{Syntaxe}
+\begin{frame}
+    \begin{columns}[c]
+    \column{0.4\textwidth}
+        \includegraphics[width=\textwidth]{chapman}
+    \column{0.6\textwidth}
+        \begin{itemize}
+        \item (item[2] for item in items)
+        \item imap(operator.itemgetter(2), items)
+        \item (item.name for item in items)
+        \item imap(operator.attrgetter("name"), items)
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+\subsection{Exemple}
+\begin{frame}[fragile]
+    \begin{columns}[c]
+    \column{0.4\textwidth}
+        \includegraphics[width=\textwidth]{chapman}
+    \column{0.6\textwidth}
+        \begin{verbatim}
+def fibonacci():
+  u, v = 1, 0
+  while 1:
+    yield u
+    u, v = v, u + v
+        \end{verbatim}
+    \end{columns}
+\end{frame}
+
+\subsection{Intérêt}
+\begin{frame}
+    \begin{columns}[c]
+    \column{0.4\textwidth}
+        \includegraphics[width=\textwidth]{chapman}
+    \column{0.6\textwidth}
+        \begin{itemize}
+        \item Simple
+        \item Rapide
+        \item Générique
+        \item Suite infinie
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+\subsection{Types simples}
+\begin{frame}
+    \begin{columns}[c]
+    \column{0.4\textwidth}
+        \includegraphics[width=\textwidth]{chapman}
+    \column{0.6\textwidth}
+        \begin{itemize}
+        \item list : [(3 + x**2) for x in xrange(10, 1000)]
+        \item tuple : tuple((3 + x**2) for x in xrange(10, 1000))
+        \item dict : dict((cle, valeur) for cle, valeur in elements)
+        \item ...
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+\section{with}
+
+\subsection{Avant}
+\begin{frame}[fragile]
+    \begin{columns}[c]
+    \column{0.6\textwidth}
+        \begin{verbatim}
+f = open('text', 'w')
+f.write('hello!')
+f.close()
+        \end{verbatim}
+    \column{0.4\textwidth}
+        \includegraphics[width=\textwidth]{foot}
+    \end{columns}
+\end{frame}
+
+\subsection{Après}
+\begin{frame}[fragile]
+    \begin{columns}[c]
+    \column{0.6\textwidth}
+        \begin{verbatim}
+# Python 2.5
+from __future__ \
+ import with_statement
+with open('text', 'w') as f:
+    f.write('hello!')
+        \end{verbatim}
+
+        Fichier, verrou, vos propres objets, etc.
+    \column{0.4\textwidth}
+        \includegraphics[width=\textwidth]{foot}
+    \end{columns}
+\end{frame}
+
+\section{Décorateur}
+
+\subsection{Existants}
+\begin{frame}
+    \begin{itemize}
+    \item @classmethod
+    \item @staticmethod
+    \item @property
+    \end{itemize}
+\end{frame}
+
+\subsection{Example}
+\begin{frame}[fragile]
+\begin{verbatim}
+def deprecated(comment=None):
+    def _deprecated(func):
+        def newFunc(*args, **kwargs):
+            message = "Call deprecated function %s" % func.__name__
+            if comment:
+                message += ": " + comment
+            warn(message, category=DeprecationWarning, stacklevel=2)
+            return func(*args, **kwargs)
+        newFunc.__name__ = func.__name__
+        newFunc.__doc__ = func.__doc__
+        return newFunc
+    return _deprecated
+\end{verbatim}
+\end{frame}
+
+\subsection{Utilisation}
+\begin{frame}[fragile]
+\begin{verbatim}
+@deprecated
+def initialize_random():
+    ...
+
+@deprecated("Use TimedeltaWin64 field type")
+def durationWin64(field):
+    ...
+\end{verbatim}
+\end{frame}
+
+\section{Bonus}
+
+\subsection{set}
+\begin{frame}[fragile]
+    \begin{columns}[c]
+    \column{0.4\textwidth}
+        \includegraphics[height=0.8\textheight]{pythonsexy}
+    \column{0.6\textwidth}
+        \begin{verbatim}
+>>> "a" in set("abc")
+True
+>>> set("abc") | set("ad")
+set(['a', 'c', 'b', 'd'])
+>>> set("abc") - set("ad")
+set(['c', 'b'])
+        \end{verbatim}
+    \end{columns}
+\end{frame}
+
+\subsection{Modules standards}
+\begin{frame}
+    \begin{columns}[c]
+    \column{0.4\textwidth}
+        \includegraphics[height=0.8\textheight]{pythonsexy}
+    \column{0.6\textwidth}
+        \begin{itemize}
+        \item datetime : date et heure
+        \item logging : loguer du texte
+        \item optparse : arguments sur la ligne de commande
+        \item pprint.pprint() : \textit{pretty print}
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+\subsection{Modules externes}
+\begin{frame}
+    \begin{columns}[c]
+    \column{0.4\textwidth}
+        \includegraphics[height=0.8\textheight]{pythonsexy}
+    \column{0.6\textwidth}
+        \begin{itemize}
+        \item BeautilfulSoup : parser du HTML non conforme
+        \item PIL : Python Imaging Library
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+\subsection{Questions ?}
+\begin{frame}
+    \begin{center}
+        \includegraphics[height=0.9\textheight]{pythonsexy}
+    \end{center}
+\end{frame}
+
+\subsection{Sources}
+\begin{frame}
+    \begin{itemize}
+    \item http://upload.wikimedia.org/wikipedia/en/9/90/Chapman\_as\_Brian.jpg
+    \item http://www.flickr.com/photos/chris-parry/3007001331/
+    \item http://www.flickr.com/photos/barrykidd/1763691970/
+    \item http://stackoverflow.com/questions/101268
+    \item http://python.net/~goodger/projects/pycon/2007/idiomatic/
+    \item Trucs et astuces, Victor Stinner, Hors Série Linux Magazine 40 (janvier/février 2009)
+    \end{itemize}
+\end{frame}
+
+\end{document}

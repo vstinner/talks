@@ -1,0 +1,61 @@
+\section{Bonnes pratiques}
+
+\subsection{Décoder le plus tôt}
+\frame
+{
+    \begin{columns}[c]
+        \column{0.5\textwidth}
+            \begin{itemize}
+            \item codecs.open("fichier", "r", encoding="utf-8")
+            \item texte = octets.decode("utf-8")
+            \end{itemize}
+        \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{python2}
+    \end{columns}
+}
+
+\subsection{Détecter l'encodage}
+\frame
+{
+    \begin{columns}[c]
+        \column{0.5\textwidth}
+            \begin{itemize}
+            \item Fiable pour ASCII et UTF-8
+            \item Heuristique pour les autres
+            \item \texttt{chardet} (Mozilla)
+            \end{itemize}
+        \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{python2}
+    \end{columns}
+}
+
+\subsection{Forcer unicode (Python 2.x)}
+\frame
+{
+    \begin{columns}[c]
+        \column{0.5\textwidth}
+            \begin{itemize}
+            \item "caractères" $\rightarrow$ u"caractères"
+            \item from \_\_future\_\_ import unicode\_literals
+            \item str(var) $\rightarrow$ unicode(var)
+            \item def \_\_str\_\_(self) $\rightarrow$ def \_\_unicode\_\_(self)
+            \end{itemize}
+        \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{python2}
+    \end{columns}
+}
+
+\subsection{Encoder le plus tard}
+\frame
+{
+    \begin{columns}[c]
+        \column{0.5\textwidth}
+            \begin{itemize}
+            \item codecs.open("fichier", "w", encoding="utf-8")
+            \item octets = texte.encode("utf-8")
+            \end{itemize}
+        \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{python2}
+    \end{columns}
+}
+

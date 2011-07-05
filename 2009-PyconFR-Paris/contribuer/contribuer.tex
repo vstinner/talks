@@ -1,0 +1,227 @@
+\documentclass[handout]{beamer}
+
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+  \usefonttheme{structurebold}
+}
+\setbeamercovered{dynamic}
+\usepackage[utf8]{inputenc}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+
+\title[De la naissance à la mort d'un ticket]{Contribuer à Python}
+
+\author{Victor Stinner}
+
+\date{Pycon FR, Paris, mai 2009}
+
+\beamerdefaultoverlayspecification{<+->}
+
+\begin{document}
+
+\begin{frame}
+    \begin{columns}[c]
+        \column{0.3\textwidth}
+            \titlepage
+
+        \column{0.7\textwidth}
+            \includegraphics[width=\textwidth]{pycon2008}
+    \end{columns}
+\end{frame}
+
+\section{Contribuer à Python}
+
+\subsection{Canaux de communication}
+\frame
+{
+    \begin{columns}[c]
+        \column{0.4\textwidth}
+            \includegraphics[width=\textwidth]{pythonlogo}
+        \column{0.6\textwidth}
+            \begin{itemize}
+            \item http://bugs.python.org/
+            \item python-ideas@python.org
+            \item python-dev@python.org
+            \item http://www.python.org/dev/peps/
+            \item \#python-dev (irc.freenode.net)
+            \end{itemize}
+    \end{columns}
+}
+
+
+\subsection{Améliorations}
+\frame
+{
+    \begin{columns}[c]
+        \column{0.4\textwidth}
+            \includegraphics[width=\textwidth]{pythonlogo}
+        \column{0.6\textwidth}
+            \begin{itemize}
+            \item Correction de typo dans la doc
+            \item Correction de bug
+            \item Nouvelle fonction / module
+            \item Extension de la syntaxe
+            \end{itemize}
+    \end{columns}
+}
+
+\section{Suivi de tickets}
+
+\subsection{Ouverture d'un ticket}
+\frame
+{
+    \begin{columns}[c]
+        \column{0.5\textwidth}
+            \begin{itemize}
+            \item Authentification obligatoire
+            \item Nouveau ticket
+            \item Demande de détails
+            \item Script pour reproduire un bug
+            \end{itemize}
+        \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{bugs}
+    \end{columns}
+}
+
+\subsection{Nombreux allers-retours}
+\frame
+{
+    \begin{columns}[c]
+        \column{0.5\textwidth}
+            \begin{itemize}
+            \item Proposition d'un patch
+            \item Patch relu, critiqué
+            \item Parfois réécrit
+            \item \textit{Nosy list} : envoi courriels
+            \end{itemize}
+        \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{bugs}
+    \end{columns}
+}
+
+\subsection{Rejet d'un ticket}
+\frame
+{
+    \begin{columns}[c]
+        \column{0.5\textwidth}
+            \begin{itemize}
+            \item Proposition refusée
+            \item Contredit une PEP
+            \item Manque d'info (vieux ticket)
+            \item Nombreux rejets
+            \end{itemize}
+        \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{bugs}
+    \end{columns}
+}
+
+\subsection{Processus long}
+\frame
+{
+    \begin{columns}[c]
+        \column{0.5\textwidth}
+            \begin{itemize}
+            \item Développeurs \textbf{volontaires} et \textbf{bénévoles}
+            \item Travaillent sur leur temps libre
+            \item Rares retours avant une semaine
+            \item Problèmes humains
+            \item 1 jour à 5 ans pour fermer un ticket
+            \end{itemize}
+        \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{bugs}
+    \end{columns}
+}
+
+\subsection{Écrire un bon ticket}
+\frame
+{
+    \begin{columns}[c]
+        \column{0.5\textwidth}
+            \begin{itemize}
+            \item Conditions pour reproduire le bug
+            \item Renseigner tous les champs
+            \item Script pour reproduire le bug
+            \item Réactivité dépendente de la qualité du ticket
+            \end{itemize}
+        \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{bugs}
+    \end{columns}
+}
+
+\subsection{Problèmes courants d'un patch}
+\frame
+{
+    \begin{columns}[c]
+        \column{0.5\textwidth}
+            \begin{itemize}
+            \item Manque de documentation
+            \item Absence de test
+            \item \textit{Reference leak} (en C)
+            \item Besoin de connaitre les entrailles de CPython
+            \end{itemize}
+        \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{bugs}
+    \end{columns}
+}
+
+\section{CPython}
+
+\subsection{Fichiers}
+\frame
+{
+    \begin{columns}[c]
+        \column{0.4\textwidth}
+            \includegraphics[height=0.9\textheight]{cpython}
+        \column{0.6\textwidth}
+            \begin{itemize}
+            \item Documentation : reST (21\%)
+            \item Cœur et quelques modules : C (28\%)
+            \item Modules et tests : Python (44\%)
+            \item Quelques outils : Python (7\%)
+            \item 4000 fichiers
+            \end{itemize}
+    \end{columns}
+}
+
+\subsection{Suite de tests}
+\frame
+{
+    \begin{columns}[c]
+        \column{0.4\textwidth}
+            \includegraphics[height=0.9\textheight]{cpython}
+        \column{0.6\textwidth}
+            \begin{itemize}
+            \item Couverture de 90\% ou mieux
+            \item Milliers de tests
+            \item Utilisé par Jython, PyPy, etc.
+            \item Sert de spécification du langage...
+            \end{itemize}
+    \end{columns}
+}
+
+\subsection{Questions ?}
+\frame
+{
+    \begin{center}
+        Questions ?
+    \end{center}
+}
+
+\section*{Cette présentation}
+
+\subsection{Sources}
+\frame
+{
+    \begin{itemize}
+    \item http://www.flickr.com/photos/ricegf/402219133/
+    \item http://www.flickr.com/photos/bellhuey56/427851741/
+    \item http://www.flickr.com/photos/coastwalker/2177977647/
+    \item http://www.python.org/community/logos/
+    \item http://www.python.org/dev/contributing/
+    \item http://www.python.org/dev/workflow/
+    \end{itemize}
+}
+
+\end{document}

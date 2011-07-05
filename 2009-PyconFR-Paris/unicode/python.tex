@@ -1,0 +1,91 @@
+\section{Python}
+
+\subsection{Python 2.x}
+\frame
+{
+    \begin{columns}[c]
+        \column{0.4\textwidth}
+            \includegraphics[width=\textwidth]{python1}
+        \column{0.6\textwidth}
+            \begin{itemize}
+            \item Types str (octets) et unicode (caractères)
+            \item "abc" : chaîne d'\textbf{octets}
+            \item u"def" : chaîne de \textbf{caractères}
+            \end{itemize}
+    \end{columns}
+}
+
+\subsection{Problèmes Python 2.x}
+\frame
+{
+    \begin{columns}[c]
+        \column{0.4\textwidth}
+            \includegraphics[width=\textwidth]{python1}
+        \column{0.6\textwidth}
+            \begin{itemize}
+            \item Conversion \textbf{implicite} dans les deux sens
+            \item "abc" + u"def" $\rightarrow$ "abcdef"
+            \item "ab\textbackslash xe9" + u"def" $\rightarrow$ UnicodeDecodeError
+            \item Maux de tête douloureux
+            \end{itemize}
+    \end{columns}
+}
+
+\subsection{Python 3.x}
+\frame
+{
+    \begin{columns}[c]
+        \column{0.4\textwidth}
+            \includegraphics[width=\textwidth]{python1}
+        \column{0.6\textwidth}
+            \begin{itemize}
+            \item Types bytes (octets) et str (caractères)
+            \item "abc" : chaîne de \textbf{caractères}
+            \item b"def" : chaîne d'\textbf{octets}
+            \item b"abc" + "def" $\rightarrow$ TypeError
+            \item Nouvelle bibliothèque io
+            \end{itemize}
+    \end{columns}
+}
+
+\subsection{Jeu de caractères du code source}
+\frame
+{
+    \begin{columns}[c]
+        \column{0.4\textwidth}
+            \includegraphics[width=\textwidth]{python1}
+        \column{0.6\textwidth}
+            \begin{itemize}
+            \item Python 2.x : ASCII par défaut
+            \item Python 3.x : UTF-8 par défaut
+            \item PEP 263 : "\#coding:utf8"
+            \end{itemize}
+    \end{columns}
+}
+
+\subsection{Notation d'un caractère}
+\begin{frame}[fragile]
+    \begin{verbatim}
+print u"E accent aigu : é" (PEP 263)
+# 0x00..0xff
+print u"E accent aigu : \xe9"
+# 0x00..0xffff
+print u"Phi : \u03a6"
+# 0x00..0x10ffff
+print u"A (cunéiforme) : \U00120000"
+print u"Phi : \N{GREEK CAPITAL LETTER PHI}"
+    \end{verbatim}
+\end{frame}
+
+\subsection{Manipuler Unicode}
+\begin{frame}[fragile]
+    \begin{verbatim}
+>>> unicodedata.name(u"é")
+'LATIN SMALL LETTER E WITH ACUTE'
+>>> unicodedata.decomposition(u"é")
+'0065 0301'
+>>> unicodedata.normalize("NFC", u"u\u0308")
+u'ü'
+    \end{verbatim}
+\end{frame}
+
