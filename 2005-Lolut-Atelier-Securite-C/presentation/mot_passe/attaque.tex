@@ -1,0 +1,87 @@
+\section{Différentes attaques}
+
+\subsection{Attaque par dictionnaire}
+
+\begin{frame}
+  \frametitle{Attaque par dictionnaire}
+
+  \begin{columns}
+    \begin{column}{1.0\textwidth}<1->
+      \begin{itemize}
+      \item<1-> Pour attaquer un système d'authentification, on peut tester
+      les mots de passe les plus courant. On utilise pour cela des
+      dictionnaires.
+      \item<2-> Le programme d'attaque utilise les astuces courantes comme
+      ajouter un nombre à la fin d'un mot (jojo42) ou remplacer une lettre
+      par un chiffre (h4k3r).
+      \item<3-> La solution pour éviter ces attaques est de limiter le
+      nombre d'essai d'authentification et/ou ajouter un délai après un
+      échec.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Attaque par force brute}
+
+\begin{frame}
+  \frametitle{Attaque par force brute}
+
+  \begin{columns}
+    \begin{column}{0.9\textwidth}<1->
+      \begin{itemize}
+      \item<1-> Parfois, un attaque par force brute est envisageable. Elle
+      consiste à tester tous les mots de passe possibles.
+      \item<2-> On teste par exemple les mots de passe entre 1 et 8
+      caractères composés de lettres ou de chiffre.
+      \item<3-> Mais c'est le cas de dernier recours, le social engineering
+      est bien plus efficace !
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Attaque de hash}
+
+\begin{frame}
+  \frametitle{Attaque de hash}
+
+  \begin{columns}
+    \begin{column}{0.9\textwidth}<1->
+      \begin{itemize}
+      \item<1-> Une fonction de hashage est très difficilement réversible,
+      mais c'est possible. Le principe consiste à essayer un mot de passe, calculer
+      son hash et le comparer au hash qu'on veut "casser".
+      \item<2-> Le logiciel RainbowCrack précalcule des hashs et possède
+      un algorithme d'accès très rapide. Il produit des fichiers d'une
+      taille allant jusqu'à 64 Go. 
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Social engineering}
+
+\begin{frame}
+  \frametitle{Social engineering}
+  \framesubtitle{Because human stupidity has no limit}
+
+  \begin{columns}
+    \begin{column}{1.0\textwidth}<1->
+      \begin{itemize}
+      \item<1-> Le social engineeing
+      est une méthode permettant de soustraire une information
+      ou un bien en usant de l'ignorance et la naïveté de sa victime.
+      
+      \item<2-> Cette technique peut se pratiquer par téléphone (moyen le plus
+      simple et rapide), par email, par lettre, ou par contact direct.
+      
+      \item<3-> La méthode la plus connue est l'hameçonage (phishing en
+      anglais) qui consiste à envoyer un email à sa victime lui demandant
+      d'aller sur un faux site pour revalider son mot de passe.
+
+      \item<4-> La meilleure solution reste la paranoïa
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}

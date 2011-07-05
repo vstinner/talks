@@ -1,0 +1,118 @@
+\documentclass[twocolumn]{article}
+
+\title{Aide-mémoire sur les failles en C}
+\author{Victor Stinner}
+\date{5 octobre 2005}
+
+% Reduit les marges
+\usepackage{geometry}
+\geometry{ hmargin=2cm, vmargin=1.5cm }
+
+% Options du document
+\usepackage[french]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+
+\begin{document}
+
+\maketitle
+
+\section{Failles en C}
+
+\subsection{Débordement (buffer overflow et integer overflow)}
+
+Les erreurs de programmation les plus courantes sont les erreurs de débordement.
+Les cas les plus connus sont :
+\begin{itemize}
+\item buffer overflow : l'entrée clavier est plus longue que prévue
+\item integer overflow : dépassement de capacité d'un nombre entier
+  qui le fait passer dans les nombres négatifs
+\end{itemize}
+
+Ces failles sont très courantes, allez faire un tour sur le site frsirt(.com),
+pour vous en rendre compte. Elles permettent d'injecter du code arbitraire. 
+
+\subsection{Fonctions (de la libc) connues pour être faillibles}
+
+De nombreuses fonctions standards contiennent des failles de sécurité
+(si elles sont mal utilisées).
+Liste volontairement incomplète : strcpy(), strcat(), sprintf(), vsprintf(), getwd(),
+gets(), realpath(), ... 
+
+\subsection{Autres types de faille}
+
+Heap overflow, format string, déni de service, insecure
+temporary file creation, race condition, problème de droit d'accès aux
+fichiers, problème de stockage des mots de passe, missing input sanitising, ...
+
+\section{Trouver les failles}
+
+\subsection{Sources d'information}
+
+\begin{itemize}
+\item Événements clavier et souris
+\item Pipe Unix
+\item Fichiers
+\item Donnée en provenance d'un réseau (socket)
+\item Variable d'environnement (on n'y pense pas souvent)
+\item Signaux : ce n'est pas à proprement parler une source de données,
+  mais on peut agir sur un programme
+\item etc.
+\end{itemize}
+
+\subsection{Stresser un programme}
+
+Pour stresser un programme, il faut lui envoyer des données auquelles il ne s'attend pas.
+Pour une chaîne de caractères, cela peut être par exemple :
+
+\begin{itemize}
+\item Chaîne vide
+\item Chaîne contenant des caractères nuls
+\item Chaîne trop courte / trop longue
+\item etc. 
+\end{itemize}
+
+\section{Solutions}
+
+\subsection{Protéger la pile}
+
+Ajout d'un canari sur le pile pour vérifier les débordements. Voir StackField
+et l'option de compilation GS dans Visual Studio .NET. OpenBSD et Linux
+(patch PaX) interdisent l'exécution de code sur le pile. Les processeurs
+AMD (flag NX) et Intel (flag XD) apportent une solution matérielle à ce problème.
+
+\subsection{Protéger les fonctions sensibles}
+
+La bibliothèque libsafe remplace les fonctions sensibles de la libc
+par une version plus sécurisée.
+http://www.research.avayalabs.com/project/libsafe/
+
+\subsection{Utiliser un langage de haut-niveau ?}
+
+Les langages dits de "haut niveau" évitent les failles les plus communes 
+telle que le buffer overflow.
+Quelques langages dits de "haut-niveau" : PHP, Python, Perl, Java, Haskell, etc. 
+
+\section{Liens sur le web}
+
+\begin{itemize}
+\item Splint : outil d'analyse statique de code C. \\
+  http://www.splint.org/
+\item Protections contre l'exploitation des débordements de buffer,
+article paru dans magazine MISC \\
+  http://www.miscmag.com/articles/index.php3?page=415
+\item FrSIRT 24h/24 7j/7, actualité des failles de sécurité \\
+  http://www.frsirt.com/
+\item Phrack, eZine sur la sécurité informatique \\
+  http://www.phrack.org/
+\item Packet storm security : annuaire d'outils, exploits, articles, etc. \\
+  http://packetstormsecurity.org/
+\item Insecure (auteur du logiciel nmap) : liste d'outils, 
+liste de diffusion, exploits, etc. \\
+  http://www.insecure.org/
+\item Articles de sécurité sur mon site perso \\ 
+  http://www.haypocalc.com/wiki/Sécurité
+\end{itemize}
+
+\end{document}

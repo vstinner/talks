@@ -1,0 +1,91 @@
+\section{Principe du maillon faible}
+
+\subsection{Présentation du principe}
+
+\begin{frame}
+  \frametitle{Principe du maillon faible}
+
+  \begin{columns}
+    \begin{column}{0.7\textwidth}<1->
+      \begin{itemize}
+      \item<1-> La sécurité d'un système est celle de l'élément le plus faible. 
+      \item<2-> Il faut connaitre tous les éléments du système, ne rien négliger.
+      \item<3-> Rien ne sert d'installer une porte blindée sur un mur en carton. 
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Exemple : Authentification sur un ordinateur (local)}
+
+\begin{frame}
+  \frametitle{Exemple : Authentification sur un ordinateur (local)}
+
+  \begin{columns}
+    \begin{column}{0.7\textwidth}<1->
+      \begin{itemize}
+      \item<1-> Choix des mots de passe.
+      \item<2-> Est-ce que le bootloader (Lilo/Grub) est sécurisé ? 
+      \item<3-> Est-ce que le BIOS est sécurisé ?
+      \item<4-> Est-ce que l'ordinateur est physiquement sécurisé ?\\
+      (fermé par un cadenas et attaché au bureau)
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Exemple : Faille dans Linux}
+
+\begin{frame}[t]
+  \frametitle{Exemple : Faille dans Linux}
+  \framesubtitle{Architecture d'un ordinateur}
+
+  \begin{columns}
+    \begin{column}{0.7\textwidth}<1->
+    \begin{itemize}
+      \item<1-> Applications : Firefox, Gimp, Gvim, Xchat, etc.
+      \item<2-> Bibliothèques : libc, zlib, GTK, X11, etc.
+      \item<3-> Noyau : Linux, OpenBSD, Hurd, etc.
+      \item<4-> Matériel : Processeur, mémoire, carte vidéo, chipset, etc.
+    \end{itemize}    
+    \includegraphics[height=10ex]{schema_appli.eps}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemple : Faille dans Linux}
+  \framesubtitle{Faille chown}
+
+  \begin{columns}
+    \begin{column}{0.7\textwidth}<1->
+      \begin{itemize}
+      \item<1-> Linux est développé par des humains, et du coup est
+      faillible. Des failles sont régulièrement découvertes dans le
+      noyau.
+      \item<2-> Exemple : faille permettant de changer le propriétaire 
+      (groupe) d'un fichier dans les version inférieures à 2.4.28 et
+      2.6.8. Voir l'exploit :
+      www.0xdeadbeef.info/exploits/raptor\_chown.c
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemple : Faille dans Linux}
+  \framesubtitle{Extrait de l'exploit chown}
+
+  \begin{center}
+     chown(argv[1], -1, getgid());
+
+     \begin{itemize}
+       \item argv[1] : Nom du fichier
+       \item -1 : Propriétaire du fichier, -1 signifie "pas de changement"
+       \item getgid() : Groupe du fichier, utilise le groupe de l'utilisateur
+       ayant lancé le programme.
+     \end{itemize}
+  \end{center}
+\end{frame}
+
+

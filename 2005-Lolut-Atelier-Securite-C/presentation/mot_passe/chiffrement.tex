@@ -1,0 +1,44 @@
+\section{Chiffrement et signature}
+
+\subsection{Algorithmes de chiffrement}
+
+\begin{frame}
+  \frametitle{Algorithmes de chiffrement}
+
+  \begin{columns}
+    \begin{column}{1.0\textwidth}<1->
+      \begin{itemize}
+      \item<1-> Ancêtres : XOR, Cesar, etc.
+      \item<2-> Symétriques : RC5, DES, AES, etc.
+      \item<3-> Asymétriques : RSA, ElGamal, etc.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Algorithmes de signature}
+
+\begin{frame}
+  \frametitle{Algorithmes de signature}
+
+  \begin{columns}
+    \begin{column}{0.9\textwidth}<1->
+      \begin{itemize}
+      
+      \item<1-> Un hash est un condensat d'une longueur fixe d'une chaîne
+      de caractère ou d'un fichier. On s'en sert pour signer un document
+      électronique (vérifier qu'il n'a pas été modifié). En cryptographie,
+      le but rechercher est qu'il soit difficile de revenir au mot de passe
+      en partant du hash.
+
+      \item<2-> Ancêtres : CRC32.
+
+      \item<3-> Déconseillés : MD5 et SHA-1.
+      
+      \item<4-> Modernes : Whirlpool et Tiger (orientés sécurité).
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+

@@ -1,0 +1,41 @@
+\section{Les mots de passe}
+
+\subsection{Stockage du mot de passe}
+
+\begin{frame}
+  \frametitle{Stockage du mot de passe}
+
+  \begin{columns}
+    \begin{column}{1.0\textwidth}<1->
+      \begin{itemize}
+      \item<1-> Stockage en clair. Exemple : Gaim.
+      \item<2-> Codage standard comme base64. Exemples : evolution, ncftp, yafc.
+      \item<3-> Codage maison. Exemple : gftp.
+      \item<4-> Stockage sous forme de hash. Exemple : mot de passe Unix.
+      \item<5-> Vrai chiffrement. Exemple : Firefox (si le mot de passe
+      principal est défini) et KWallet (sous KDE).
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{Transfert sur le réseau}
+
+\begin{frame}
+  \frametitle{Mots de passe circulant sur le réseau}
+
+  \begin{columns}
+    \begin{column}{1.0\textwidth}<1->
+      \begin{itemize}
+      \item<1-> De nombreux protocoles de communications envoyent les mots
+      de passe en clair: telnet, POP3, FTP, HTTP Basic, etc.
+      \item<2-> On peut encapsuler ces protocoles dans un tunnel sécurisé
+      tel que SSH.
+      \item<3-> Ou bien utiliser des protocoles plus sûrs tel que POP3 par SSL,
+      HTTPS, SFTP, SSH, etc.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+

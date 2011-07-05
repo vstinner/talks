@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:xml="http://www.w3.org/XML/1998/namespace"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="schema_appli.svg"
+   sodipodi:docbase="/home/haypo/atelier-secu/01-c-asm"
+   inkscape:version="0.41"
+   sodipodi:version="0.32"
+   id="svg2"
+   height="297mm"
+   width="210mm">
+  <defs
+     id="defs3" />
+  <sodipodi:namedview
+     showgrid="true"
+     inkscape:guide-bbox="true"
+     showguides="true"
+     inkscape:window-y="0"
+     inkscape:window-x="34"
+     inkscape:window-height="716"
+     inkscape:window-width="986"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="px"
+     inkscape:cy="814.68541"
+     inkscape:cx="195.26428"
+     inkscape:zoom="4.8796359"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base">
+    <sodipodi:guide
+       id="guide3620"
+       position="127.64642"
+       orientation="vertical" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata4">
+    <rdf:RDF
+       id="RDF5">
+      <cc:Work
+         id="Work6"
+         rdf:about="">
+        <dc:format
+           id="format7">image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage"
+           id="type9" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <rect
+       y="201.84752"
+       x="128.26509"
+       height="21.421173"
+       width="74.234741"
+       id="rect2056"
+       style="fill:#5081ff;fill-opacity:1.0000000;stroke:#000000;stroke-width:1.0328146;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.0000000;stroke-opacity:1.0000000" />
+    <rect
+       y="220.34813"
+       x="122.61686"
+       height="22.487305"
+       width="83.747398"
+       id="rect2064"
+       style="fill:#05c300;fill-opacity:1.0000000;stroke:#000000;stroke-width:1.1336520;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.0000000;stroke-opacity:1.0000000" />
+    <text
+       id="text2052"
+       y="214.47937"
+       x="131.97656"
+       style="font-size:12.000000;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:helvetica"
+       xml:space="preserve"><tspan
+         y="214.47937"
+         x="131.97656"
+         id="tspan2054"
+         sodipodi:role="line">Application</tspan></text>
+    <text
+       id="text2060"
+       y="233.47937"
+       x="137.41992"
+       style="font-size:12.000000;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:helvetica"
+       xml:space="preserve"><tspan
+         y="233.47937"
+         x="137.41992"
+         id="tspan2062"
+         sodipodi:role="line">Librairies</tspan></text>
+    <rect
+       y="239.54446"
+       x="117.69872"
+       height="30.144533"
+       width="93.587486"
+       id="rect2824"
+       style="fill:#ffff2f;fill-opacity:1.0000000;stroke:#000000;stroke-width:1.3171597;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.0000000;stroke-opacity:1.0000000" />
+    <text
+       id="text2826"
+       y="252.86609"
+       x="141.82227"
+       style="font-size:12.000000;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:helvetica"
+       xml:space="preserve"><tspan
+         y="252.86609"
+         x="141.82227"
+         id="tspan2828"
+         sodipodi:role="line">Noyau</tspan></text>
+    <rect
+       y="257.84750"
+       x="110.94546"
+       height="16.574837"
+       width="105.46704"
+       id="rect2830"
+       style="fill:#ff2417;fill-opacity:1.0000000;stroke:#000000;stroke-width:1.0173360;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:2.0000000;stroke-opacity:1.0000000" />
+    <text
+       id="text2832"
+       y="269.95984"
+       x="140.32227"
+       style="font-size:12.000000;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1.0000000;stroke:none;stroke-width:1.0000000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;font-family:helvetica"
+       xml:space="preserve"><tspan
+         y="269.95984"
+         x="140.32227"
+         id="tspan2834"
+         sodipodi:role="line">Matériel</tspan></text>
+  </g>
+</svg>

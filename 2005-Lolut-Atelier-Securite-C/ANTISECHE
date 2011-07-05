@@ -1,0 +1,31 @@
+example01.c : gets est à proscrire
+example02.c : la valeur de retour de fgets n'est pas vérifiée
+example03.c : illustration de l'exemple 02 : avec « echo "21" | ./example2 »
+  la chaîne name n'est pas modifiée alors qu'elle ne contient pas de
+  "\0" final.
+example04.c : Cas où une chaîne vide est saisie ?
+  echo "02" | ./example4
+example05.c : Montre simplement la factorisation de code 
+
+exo01.c :
+  getenv + strcpy dans  getHome(): $HOME
+    PATH_MAX=4096 defini dans /usr/include/linux/limits.h
+  loadName: fichier trop grand
+exo02.c :
+  mélange long / unsigned long qui donne des trucs bizzares
+  genre "./exo02 -10" qui plante
+exo03.c :
+  format string
+exo04.c :
+  race condition
+  file permission
+
+faille.php:
+ $ php test.php haypo
+ haypo:x:1024:1000:Victor STINNER,,,:/home/haypo:/bin/bash
+ $ php test.php 'notfound /etc/passwd && uname -a #'
+ Linux haypopc 2.6.12.4 #6 Thu Sep 8 01:26:27 CEST 2005 i686 GNU/Linux 
+faille.pl:
+ $ perl test.pl /etc/passwd
+ $ perl test.pl 'uname -a|'
+

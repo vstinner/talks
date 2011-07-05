@@ -1,0 +1,7 @@
+Stresser le Hello World:
+- Chaîne trop longue : echo "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" | ./hello
+- Chaîne vide : echo -n "" | ./hello
+- Nombre invalide : echo -ne "e\nVictor\n" | ./hello
+- Tuer l'entrée standard avant de valider le nom : echo -ne "22\n" | ./hello
+
+Beaucoup d'erreurs sont detectables avec « splint -weak fichier.c ».
