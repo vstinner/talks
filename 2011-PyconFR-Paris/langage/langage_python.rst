@@ -11,7 +11,7 @@ Mon parcours
 * PHP
 * Python
 
-.. comment:: Javascript, Delphi
+.. Javascript, Delphi
 
 POO
 ===
@@ -20,7 +20,7 @@ POO
 * C : read(*file*, buffer, size)
 * Python : f.readline(); f.read(size)
 
-.. comment:: strcpy(a, b)?
+.. strcpy(a, b)?
 
 POO: bonus
 ==========
@@ -65,7 +65,7 @@ Espace de nommage
 * Python : os.open(), os.read()
 * Noms plus courts, mieux organisé
 
-.. todo:: bibliothèque commune Python/PHP
+.. TODO: bibliothèque commune Python/PHP
 
 Explicite
 =========
@@ -103,7 +103,7 @@ Pas d'ASCII Art
 * PHP : $dico = Array('cle' => 'valeur');
 * Perl, PHP : Getopt::Long::Getoption, Classe::methode
 
-.. comment:: Perl : local $| = 1;
+.. Perl : local $| = 1;
 
 Pas d'ASCII Art
 ===============
@@ -194,9 +194,11 @@ with
 Slice
 =====
 
-x=[1, 2, 3, 4, 5]
-assert x[:3] == [1, 2, 3]
-x[1:3] == [9]
+::
+
+    x=[1, 2, 3, 4, 5]
+    assert x[:3] == [1, 2, 3]
+    x[1:3] == [9]
 
  * tuple, list, bytes, str
 
