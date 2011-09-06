@@ -75,8 +75,9 @@ for x in y ("foreach")
  * tuple, list, dict, set, bytes, str
  * fichier (ligne par ligne)
  * type utilisateur (__iter__, __next__)
- * PHP : foreach sur chaîne ? sur fichier ?
- * C++0X : foreach(int x: liste) ...
+ * PHP : foreach ne fonctionne pas sur un fichier
+ * PHP : mais un objet peut implémenter l'API iterator
+ * C++0X : for(int &x : liste) x \*= 2;
 
 Espace de nommage
 =================
@@ -115,18 +116,6 @@ Explicite
 * Perl : foreach (@array) { say $_; }
 * Perl : foreach my $item (@array) { say $item; }
 * Python : for item in array: print(item)
-
-Bonnes pratiques
-================
-
-* Façon de faire la plus courante
-* Façon conseillée par la documentation
-* Style de bibliothèque standard
-* PEP
-* Livres
-* Communauté
-* Ex: tests (TDD)
-* Ex: PEP 8 (style)
 
 Pas d'ASCII Art
 ===============
@@ -284,6 +273,18 @@ Slice
 
  * tuple, list, bytes, str
  * pas en PHP
+
+Bonnes pratiques
+================
+
+* Façon de faire la plus courante
+* Façon conseillée par la documentation
+* Style de bibliothèque standard
+* PEP
+* Livres
+* Communauté
+* Ex: tests (TDD)
+* Ex: PEP 8 (style)
 
 Lacunes
 =======

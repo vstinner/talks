@@ -25,8 +25,8 @@ Français
 ========
 
 * Antoine Pitrou : optimisation, Linux, réorganisation exceptions
-* A de forge : Windows
-* Florent flox ?
+* Amaury forgeotdarc : Windows
+* Florent Xicluna (flox)
 * Charles François Xavier : POSIX, threads/fork, fonctions atomiques
 * Éric Araujo : Documentation, distutils
 * Victor Stinner : Unicode
