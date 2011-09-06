@@ -2,16 +2,24 @@
 Python : langage homogène, explicite et efficace
 ++++++++++++++++++++++++++++++++++++++++++++++++
 
+Avertissement
+=============
+
+* Compare Python à des langages que je connais : C, Perl, PHP, bash
+* Compare le langage (syntaxe), pas bibliothèque standard
+* Utilise d'autres langages comme illustration
+
 Mon parcours
 ============
 
 * QBASIC
 * Turbo Pascal et assembleur Intel x86
-* Borland C++ Builder
-* PHP
-* Python
+* Turbo C, Borland C++ Builder, Delphi
+* PHP (HTML, Javascript)
+* bash, Python
+* What else?
 
-.. Javascript, Delphi
+.. Delphi
 
 POO
 ===
@@ -19,13 +27,9 @@ POO
 * C : fgets(buffer, size, *file*)
 * C : read(*file*, buffer, size)
 * Python : f.readline(); f.read(size)
+* PHP non orienté objet
 
 .. strcpy(a, b)?
-
-POO: bonus
-==========
-
-* Keyword-only arguments
 
 x in y
 ======
@@ -44,6 +48,20 @@ x in y
 for x in y ("foreach")
 ======================
 
+ * C++ :
+
+::
+
+    std::vector<int> liste;
+    ...
+    for (std::vector<int>::const_iterator it=liste.begin(); it != liste.end(); ++it)
+        std::cout << *it << std::endl;
+
+::
+
+    for number in liste:
+        print(number)
+
 ::
 
     for cle in dico: ...
@@ -55,7 +73,10 @@ for x in y ("foreach")
     for item in generateur(): ...
 
  * tuple, list, dict, set, bytes, str
- * fichier
+ * fichier (ligne par ligne)
+ * type utilisateur (__iter__, __next__)
+ * PHP : foreach sur chaîne ? sur fichier ?
+ * C++0X : foreach(int x: liste) ...
 
 Espace de nommage
 =================
@@ -63,6 +84,7 @@ Espace de nommage
 * C (glib) : g_printf(), g_rand_int_range(), ...
 * PHP : iconv_get_encoding(), iconv_strlen(), ...
 * Python : os.open(), os.read()
+* from os import open, read
 * Noms plus courts, mieux organisé
 
 .. TODO: bibliothèque commune Python/PHP
@@ -70,6 +92,7 @@ Espace de nommage
 Explicite
 =========
 
+* Perl et Ruby (surtout Ruby on Rails) : convention
 * Perl : if ( $texte ~= /cle=(.*) / ) $valeur = $1;
 * Perl : system($cmd); if ($?) ...
 * Perl ::
@@ -93,15 +116,40 @@ Explicite
 * Perl : foreach my $item (@array) { say $item; }
 * Python : for item in array: print(item)
 
+Bonnes pratiques
+================
+
+* Façon de faire la plus courante
+* Façon conseillée par la documentation
+* Style de bibliothèque standard
+* PEP
+* Livres
+* Communauté
+* Ex: tests (TDD)
+* Ex: PEP 8 (style)
 
 Pas d'ASCII Art
 ===============
 
 * C : \*ptr, !a && b, test?a:b
-* Bash : $1, $#, $@, $$
+* C, bash : a && b, a || b
+* Bash : $1, $#, $@, $$, ! commande
 * Perl : $entier, @liste, %hash
 * PHP : $dico = Array('cle' => 'valeur');
 * Perl, PHP : Getopt::Long::Getoption, Classe::methode
+
+* Python : liste[index]
+* Python : @decorateur
+* Python : {'cle': 'valeur'}
+
+* 'Bonjour ' + "monde"
+* a, b, c = 1, 2, 3
+* # commentaire
+* object.attr
+* func(args)
+* def func(arg1, arg2: ...
+* a=b; a > b; a <= b; a + b; a * b; a % b; a & b; a / b; a - b
+
 
 .. Perl : local $| = 1;
 
@@ -113,6 +161,36 @@ Pas d'ASCII Art
 * entier, liste, hash
 * dico = {'cle': 'valeur'}
 * getopt.getoption, Classe.methode
+* Exception : @decorateur
+
+Gestion d'erreur : code de retour vs exception
+==============================================
+
+
+Perl et PHP : ::
+
+    f = open("document.txt") or die("oh là là");
+    content = f.read()
+    ...
+
+PHP (C) : ::
+
+    f = @open("document.txt");
+    if (isset(f)) {
+        content = f.read()
+        ...
+    } else {
+        echo "impossible d'ouvrir document.txt\n");
+    }
+
+Python, C++ ::
+
+    try:
+        f = open("document.txt")
+        content = f.read()
+        ...
+    except IOError, err:
+        print("Impossible de lire le contenu de document.txt")
 
 Homogène .
 ==========
@@ -134,7 +212,7 @@ Homogène in
 Homogène in
 ===========
 
-* Perl : f, "f 1", "f 1, 2";
+* Perl : f, "f 1", "f 1, 2", f(1);
 * Python : f(), f(1), f(1, 2)
 
 Homogène appel fonction
@@ -148,15 +226,18 @@ Homogène appel fonction
 Appel fonction: keyword
 =======================
 
-* PHP : ?
+* PHP : myopen('/etc/password', Array('encoding' => 'utf-8'))
 * Python : fichier = open("/etc/passwd", encoding="utf-8")
+* Keyword-only arguments
 
 Callback
 ========
 
-* Perl : xxx(&func) => ?
-* PHP : xxx('func') => eval($name);
-* Python : settrace(func) => func()
+* Perl : process(&func) => ?
+* Perl : \&func ?
+* PHP : process('func', $data) => eval($name); $item ?
+* C : process(func, data) => func(item)
+* Python : process(func, data) => func(item)
 
 Effet de bord
 =============
@@ -167,7 +248,8 @@ Effet de bord
 None
 ====
 
-* C : char* func() => NULL, int func() => -1
+* C : char* func() => NULL, int func() => -1 # un seul type de retour
+* C : bool func(int \*result) => true / false
 * PHP : if (isset($_GET['page'])) ...
 * Perl : while (defined (my $error = <>)) ...
 * Python : tableau=[1, 2, 3]; tableu[42] # IndexError !
@@ -201,4 +283,26 @@ Slice
     x[1:3] == [9]
 
  * tuple, list, bytes, str
+ * pas en PHP
+
+Lacunes
+=======
+
+* a="abc", => a est un tuple
+* print "abc", => pas de retour à la ligne
+* func((a,)) pas très lisible
+* Pas d'enum => bibliothèques
+* Pas de switch => voir PEP
+* Pas de constante => module Python écrit en C
+* (Pas de regex : pas de DSL)
+* DeprecationWarning, ResourceWarning => python -Wd
+* Adoption progression des nouveautés par la bibliothèque standard (with)
+* Python lent et utilise beaucoup de mémoire => PyPy
+
+Conclusion
+==========
+
+* Syntaxe explicite
+* Langage homogène
+* Python prend le meilleur de chaque langage
 
