@@ -19,7 +19,7 @@ Personnes
 
  * Misc/ACKS : 1046 contributeurs
  * Doc/ACKS : 224 contributeurs
- * Core : ??? développeurs dont 7 français => devguide
+ * Core : 157 développeurs dont 7 français
  * 61 core developers actifs (au moins 1 commit depuis 1 an)
  * sur 12 fuseaux horaires (UTC: -08, -07, -06, -05, -04, +00, +01, +02, +03, +08, +10, +11)
 
@@ -28,10 +28,10 @@ Canaux de communication
 
  * Tout est public
  * Bugtracker
- * Liste python-dev (xx courriels / jour)
+ * Liste python-dev (30 courriels / jour)
  * IRC #python-dev (peu actif)
  * Liste python-commiters (xx courriels / jour)
- * Liste python-ideas (xx courriels / jour)
+ * Liste python-ideas (5 courriels / jour)
 
 Méritocratie
 ============
@@ -152,7 +152,7 @@ Pour finir
 
  * Developer Guide écrit par Brett Canon : http://docs.python.org/devguide/
  * Vie en dehors de CPython : http://pypi.python.org/ (Cheeseshop)
- * Python 3.3 prévu pour xx xx xxxxx
+ * Python 3.3 prévu pour août 2012 (PEP 398)
  * http://www.python.org/
  * http://www.python.org/dev/
 
