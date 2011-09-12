@@ -5,85 +5,47 @@ Développement de CPython
  * Vu par un core developer
  * Pycon FR 2011, Rennes
 
-CPython ?
-=========
+CPython
+=======
 
 * Interprète
-* Bibliothèque standard : 183 modules (de errno à concurrent.futures)
-* Documentation (182 000 lignes de reST)
-* 1 million de ligne de code
-* (410k de C, 630k de Python)
-
-Développeurs
-============
-
- * Misc/ACKS : 1046 contributeurs
- * Doc/ACKS : 224 contributeurs
- * Core : ??? développeurs
-
-Français
-========
-
-* Antoine Pitrou : optimisation, Linux, réorganisation exceptions
-* Amaury forgeotdarc : Windows
-* Florent Xicluna (flox)
-* Charles François Xavier : POSIX, threads/fork, fonctions atomiques
-* Éric Araujo : Documentation, distutils
-* Victor Stinner : Unicode
-* Tarek Ziadé : distutils, packaging
+* Bibliothèque standard : 183 modules
+* Documentation: 182 000 lignes de reST
+* 1 million de ligne de code :
+* 60% (630k) de Python, 40% (410k) de C
 
 Personnes
 =========
 
-* Guido van Rossum : solicitations occassionnelles, tranche si nécessaire, surtout sur le langage (auteur, 20 ans)
-* Martin von Loewis : unicode, plateformes exotiques (xx ans)
-* Georg.
-* Raymond
-* Marc Andre Lemburg
-* Brett Canon
-* Jess Noller
-* Doug Hellman
+ * Misc/ACKS : 1046 contributeurs
+ * Doc/ACKS : 224 contributeurs
+ * Core : ??? développeurs dont 7 français => devguide
+ * 61 core developers actifs (au moins 1 commit depuis 1 an)
+ * sur 12 fuseaux horaires (UTC: -08, -07, -06, -05, -04, +00, +01, +02, +03, +08, +10, +11)
+
+Canaux de communication
+=======================
+
+ * Tout est public
+ * Bugtracker
+ * Liste python-dev (xx courriels / jour)
+ * IRC #python-dev (peu actif)
+ * Liste python-commiters (xx courriels / jour)
+ * Liste python-ideas (xx courriels / jour)
 
 Méritocratie
 ============
 
 * N'importe qui peut contribuer, à son niveau
 * Droit de commit en échange de patchs d'excellente qualité
-* ça s'apprend
+* Ça s'apprend (parainage, devguide)
 
-Code écrit en C
-===============
+Versions de Python
+==================
 
-* Refleak
-* C : pas de liste, with, exception
-* C : goto, API C de (CPython), macros (Py_RETURN_NONE)
-* Portabilité : configure, #ifdef
-
-Code écrit en Python
-====================
-
-* Portabilité
-* Style code
-* Subtilités quand un module est en partie écrit en C
-
-Version de Python
-=================
-
-* Actif : 3.3
-* Bugfix uniquement : 2.7, 3.2
+* Active : 3.3
+* Correctifs uniquement : 2.7, 3.2
 * Sécurité uniquement : 2.5, 2.6, 3.1
-* Branches mortes : Python < 2.5, Python 3.0
-
-Canaux de communication
-=======================
-
-* Bugtracker
-* Liste python-dev (xx courriels / jour)
-* IRC #python-dev (peu actif)
-* Liste python-commiters (xx courriels / jour)
-* Liste python-checkins (xx courriels / jour)
-* PEPs
-* (python-ideas) (xx courriels / jour)
 
 Nouvelle fonction
 =================
@@ -111,25 +73,56 @@ Bugfix
 * Reproduction
 * Isoler les versions affectées
 * Isoler l'origine du bug
-* Proposition de correctif
-* Modification/réécriture du correctif
+* Propositions de correctif
+* Amélioration/réécriture du correctif
 * Correctif appliqué à Python 2.7, 3.2 et 3.3
 * 24h à quelque semaines (parfois, plusieurs années)
 
-Calendrier
-==========
+Commit
+======
 
-* Release Schedule : PEP
-* Release Manager : xxx pour 3.3
-* ?? mois entre deux versions mineures (3.2.x)
-* ?? mois entre deux versions majeures (3.x)
-* Lenteur des releases => modules externes
+ * Code relu par plusieurs pairs
+ * Ajout de nouveaux tests
+ * Documentation mise à jour
+ * Entrée Misc/NEWS
+ * Toute la suite de test passe
+ * Buildbots verts
 
-Mercurial
-=========
+Anciens bugs
+============
 
-* Fonctionnalité : commit dans 3.3
-* Bugfix : Commit dans 3.2, forward port dnas 3.3, commit dans 2.7
+ * Besoin pas clairement exprimé
+ * Intérêt limité
+ * Concerne peu de monde
+ * Pas de développeur compétent
+ * Complexe à implémenter
+ * Implémentation proposée trop crade
+
+Suite de tests
+==============
+
+ * 10.000 tests
+ * 595 fichiers
+ * 203.000 lignes de Python
+
+Buildbot
+========
+
+* 70 buildbots
+* 2.7, 3.2, 3.3
+* Windows (XP, 2008R2, Seven)
+* Linux (Ubuntu, Debian, Gentoo)
+* FreeBSD 6, 7, 8
+* Solaris, OpenIndiana
+
+Qualité
+=======
+
+ * Code portable
+ * Buildbots
+ * Revue de code : patchs sur le backtracker
+ * Outil : Rietveld
+ * Liste python-checkins (xx courriels / jour)
 
 PEPs
 ====
@@ -139,26 +132,32 @@ PEPs
 * Détaille le problème solutionné par la PEP
 * Liste les différentes propositions
 
-Liste de discussion python-dev
-==============================
+Code écrit en C
+===============
 
-* Paint my house
-* Bikesheding
+* Refleak
+* C : pas de liste, with, exception
+* C : goto, API C de (CPython), macros (Py_RETURN_NONE)
+* Portabilité : configure, #ifdef
 
-Autres implémentations
-======================
+Code écrit en Python
+====================
 
-* PyPy : Python 2.7. 3.x?
-* IronPython : 2.6 ?
-* Jython : 2.6 ?
+* Portabilité
+* Style code
+* Subtilités quand un module est en partie écrit en C
 
-Vie en dehors de CPython
-========================
+Pour finir
+==========
 
-* Modules externes, centralisés sur le magasin fromage (pypi.python.org)
+ * Developer Guide écrit par Brett Canon : http://docs.python.org/devguide/
+ * Vie en dehors de CPython : http://pypi.python.org/ (Cheeseshop)
+ * Python 3.3 prévu pour xx xx xxxxx
+ * http://www.python.org/
+ * http://www.python.org/dev/
 
-Comment contribuer à Python
-===========================
+Statistiques
+============
 
-* Devguide écrit par Brett Canon
+ * Période du 1er sept 2010 au 11 sept 2011
 

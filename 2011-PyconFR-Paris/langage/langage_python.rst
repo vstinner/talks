@@ -26,10 +26,9 @@ POO
 
 * C : fgets(buffer, size, *file*)
 * C : read(*file*, buffer, size)
-* Python : f.readline(); f.read(size)
+* Python : f.readline()
+* Python : f.read(size)
 * PHP non orienté objet
-
-.. strcpy(a, b)?
 
 x in y
 ======
@@ -57,12 +56,12 @@ for x in y ("foreach")
     for (std::vector<int>::const_iterator it=liste.begin(); it != liste.end(); ++it)
         std::cout << *it << std::endl;
 
-::
+Python : ::
 
     for number in liste:
         print(number)
 
-::
+Python : ::
 
     for cle in dico: ...
     for valeur in dico.values(): ...
@@ -75,20 +74,18 @@ for x in y ("foreach")
  * tuple, list, dict, set, bytes, str
  * fichier (ligne par ligne)
  * type utilisateur (__iter__, __next__)
- * PHP : foreach ne fonctionne pas sur un fichier
- * PHP : mais un objet peut implémenter l'API iterator
- * C++0X : for(int &x : liste) x \*= 2;
+ * PHP : foreach sur chaîne ? sur fichier ?
+ * C++0X : foreach(int x: liste) ...
 
 Espace de nommage
 =================
 
+* C : #include <stdlib.h>
 * C (glib) : g_printf(), g_rand_int_range(), ...
 * PHP : iconv_get_encoding(), iconv_strlen(), ...
 * Python : os.open(), os.read()
 * from os import open, read
 * Noms plus courts, mieux organisé
-
-.. TODO: bibliothèque commune Python/PHP
 
 Explicite
 =========
@@ -96,26 +93,29 @@ Explicite
 * Perl et Ruby (surtout Ruby on Rails) : convention
 * Perl : if ( $texte ~= /cle=(.*) / ) $valeur = $1;
 * Perl : system($cmd); if ($?) ...
-* Perl ::
-
-    if (/^\@syn(code)?index (\w+) (\w+)/)
-    {
-        delete $clean_suffixes{"$2s"};
-        $clean_suffixes{"$3s"} = 1;
-    }
-
 * Perl : open("fichier") || die("erreur: $_");
 * PHP : $_POST, $_GET
-* PHP : "Bonjour $prenom", Python : "Bonjour {}".format(prenom)
+* Perl, PHP : "Bonjour $prenom"
+* Python : "Bonjour {}".format(prenom)
 
 * Perl : sub func() { my ($a, $b) = @_; ... }
-* Perl : sub func() { $_ = shift; ... }
-* Perl : sub func($$$@) { my ($a, $b) = @_; ... }
 * Python : def func(a, b): ...
 
 * Perl : foreach (@array) { say $_; }
-* Perl : foreach my $item (@array) { say $item; }
 * Python : for item in array: print(item)
+* Perl : foreach my $item (@array) { say $item; }
+
+Bonnes pratiques
+================
+
+* Façon de faire la plus courante
+* Façon conseillée par la documentation
+* Style de bibliothèque standard
+* PEP
+* Livres
+* Communauté
+* Ex: tests (TDD)
+* Ex: PEP 8 (style)
 
 Pas d'ASCII Art
 ===============
@@ -273,18 +273,6 @@ Slice
 
  * tuple, list, bytes, str
  * pas en PHP
-
-Bonnes pratiques
-================
-
-* Façon de faire la plus courante
-* Façon conseillée par la documentation
-* Style de bibliothèque standard
-* PEP
-* Livres
-* Communauté
-* Ex: tests (TDD)
-* Ex: PEP 8 (style)
 
 Lacunes
 =======
