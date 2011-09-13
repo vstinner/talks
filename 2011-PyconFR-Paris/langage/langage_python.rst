@@ -43,6 +43,7 @@ x in y
 * PHP : in_array(*$foin*, $aiguille), array_key_exists($aiguille, *$foin*)
 * C : strstr(*foin*, aiguille)
 * Python : aiguille in *foin*
+* PHP : isset($array[$key])
 
 for x in y ("foreach")
 ======================
@@ -96,7 +97,9 @@ Explicite
 * Perl : open("fichier") || die("erreur: $_");
 * PHP : $_POST, $_GET
 * Perl, PHP : "Bonjour $prenom"
+* bash, PHP : 'raw \n'
 * Python : "Bonjour {}".format(prenom)
+* Python : r"raw \n"
 
 * Perl : sub func() { my ($a, $b) = @_; ... }
 * Python : def func(a, b): ...
@@ -224,7 +227,8 @@ Callback
 
 * Perl : process(&func) => ?
 * Perl : \&func ?
-* PHP : process('func', $data) => eval($name); $item ?
+* PHP : process('func', $data) => $func($item);
+* PHP : process('func', $data) => call_user_func($func, $item);
 * C : process(func, data) => func(item)
 * Python : process(func, data) => func(item)
 
