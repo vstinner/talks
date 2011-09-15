@@ -28,7 +28,8 @@ POO
 * C : read(*file*, buffer, size)
 * Python : f.readline()
 * Python : f.read(size)
-* PHP non orienté objet
+* Python : " abc ".strip()
+* Perl et PHP pas vraiment orientés objet
 
 x in y
 ======
@@ -107,6 +108,12 @@ Explicite
 * Perl : foreach (@array) { say $_; }
 * Python : for item in array: print(item)
 * Perl : foreach my $item (@array) { say $item; }
+
+Fonctionnel
+===========
+
+ * (expr for item in liste)
+ * yield
 
 Bonnes pratiques
 ================
@@ -232,12 +239,6 @@ Callback
 * C : process(func, data) => func(item)
 * Python : process(func, data) => func(item)
 
-Effet de bord
-=============
-
-* C : if ((a=*ptr++)) { ... }
-* Python : if a = b: ... # interdit !
-
 None
 ====
 
@@ -265,6 +266,10 @@ with
             return
         print("text=")
         print(text)
+
+.. note::
+
+   with existe en Java et C# : synchronize / serialize
 
 Slice
 =====

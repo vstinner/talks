@@ -156,6 +156,34 @@ Pour finir
  * http://www.python.org/
  * http://www.python.org/dev/
 
+Exemple de code C
+=================
+
+::
+
+    int
+    PyList_SetItem(PyObject *op, register Py_ssize_t i,
+                   PyObject *newitem)
+    {
+        PyObject *olditem, **p;
+        if (!PyList_Check(op)) {
+            Py_XDECREF(newitem);
+            PyErr_BadInternalCall();
+            return -1;
+        }
+        if (i < 0 || i >= Py_SIZE(op)) {
+            Py_XDECREF(newitem);
+            PyErr_SetString(PyExc_IndexError,
+                            "list assignment index out of range");
+            return -1;
+        }
+        p = ((PyListObject *)op) -> ob_item + i;
+        olditem = *p;
+        *p = newitem;
+        Py_XDECREF(olditem);
+        return 0;
+    }
+
 Statistiques
 ============
 
