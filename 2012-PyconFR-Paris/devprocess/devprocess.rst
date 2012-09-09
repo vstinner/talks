@@ -1,8 +1,16 @@
 ************************************
-Processus de développement de Python 
+Processus de développement de Python
 ************************************
 
 .. c'est juste histoire de mettre qqch
+
+Sommaire
+--------
+
+ * Côté technique : C, buildbot
+ * Côté humain : python-ideas, python-dev, PEP
+ * Côté humain : patch, bugs.python.org
+ * Comment contribuer
 
 Python : le langage
 -------------------
@@ -18,6 +26,42 @@ CPython : l'implémentation
 
 Amélioration du langage : les PEPs
 ----------------------------------
+
+ * Idées sur python-ideas or python-dev
+ * L'auteur rédige une PEP
+ * La PEP sert de base de travail pour la discussion
+ * PEP rejetée ou acceptée
+
+python-ideas
+------------
+
+ * Brainstorm
+ * Mauvaises idées proposées par manque de connaissance
+   du langage ou de la bibliothèque standard
+ * Changement de syntaxe rarement acceptés
+ * PEP 3150 (given) et PEP 403 (@in) rejettées
+ * Les meilleurs idées donnent lieux à des PEP
+
+PEP rejetée : PEP 410
+---------------------
+
+ * Use decimal.Decimal type for timestamps
+ * Précision d'une nanoseconde
+ * Bug os.utime(os.stat().st_mtime)
+ * 7 types différents proposés dans la PEP
+ * Rejetée par Guido car ajoute de la complexité alors que la précision d'une nanoseconde n'est pas nécessaire ni disponible
+ * os.stat() et os.utime() modifiés pour avoir le timestamp en nanosecondes (int)
+
+PEP acceptée : PEP 418
+----------------------
+
+ * Ajout des fonctions get_clock_info(name), monotonic(), perf_counter() et process_time() au module time de Python 3.3
+ * Débat des plusieurs semaines sur python-dev avec une dizaine d'intervenants
+ * Débat sur le vocabulaire : "accuracy", "monotonic", "steady"
+ * Débat sur monotonic() : fallback ou pas ?
+ * Difficile définition des fonctions (documentation)
+ * PEP avec des nombreuses annnexes sur les OS, horloges matérielles, performances
+ * Acceptée dans Python 3.3
 
 CPython : ajout de fonctionnalités
 ----------------------------------
@@ -119,3 +163,20 @@ CPython : buildbots spéciaux
 
 * un buildbot non-debug (optimisations)
 * un buildbot bigmem : 24 GB et 6 heures par build
+
+Prix de la portabilité
+----------------------
+
+ * Plusieurs implémentations d'une même fonction
+ * Cas typique : version Windows et version POSIX
+ * Soucis avec threads et signaux, notamment sous BSD
+ * Fonctions récentes d'un noyau, ex: Linux >= 2.6.28
+ * #ifdef et if dans le code
+
+Contribuer à Python
+-------------------
+
+ * devguide
+ * core-mentorship
+ * Pas besoin du droit de commit (push)
+
