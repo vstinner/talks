@@ -7,15 +7,29 @@ Processus de développement de Python
 Sommaire
 --------
 
- * Côté technique : C, buildbot
  * Côté humain : python-ideas, python-dev, PEP
  * Côté humain : patch, bugs.python.org
+ * Côté technique : C, buildbot
  * Comment contribuer
 
 Python : le langage
 -------------------
 
  * Python Enhancement Proposals
+
+Python / CPython : une communauté ouverte
+-----------------------------------------
+
+ * Développement de Python (langage + stdlib) ~= développement CPython
+ * Toutes les discussions sont publiques et ouvertes à tous
+ * ... sauf sécu, infrastructure
+
+Contribuer à Python
+-------------------
+
+ * devguide
+ * core-mentorship
+ * Pas besoin du droit de commit (push)
 
 CPython : l'implémentation
 --------------------------
@@ -40,7 +54,13 @@ python-ideas
    du langage ou de la bibliothèque standard
  * Changement de syntaxe rarement acceptés
  * PEP 3150 (given) et PEP 403 (@in) rejettées
- * Les meilleurs idées donnent lieux à des PEP
+ * Les meilleurs idées donnent lieu à des PEP
+
+python-dev
+----------
+
+ * Propositions et questions concrètes liées au développement
+ * Commentaires sur les commits
 
 PEP rejetée : PEP 410
 ---------------------
@@ -62,6 +82,16 @@ PEP acceptée : PEP 418
  * Difficile définition des fonctions (documentation)
  * PEP avec des nombreuses annnexes sur les OS, horloges matérielles, performances
  * Acceptée dans Python 3.3
+
+PEP acceptée : PEP 3151
+-----------------------
+
+ * Refonte de la hiérarchie d'exceptions d'entrées-sorties
+ * IOError, OSError, EnvironmentError, socket.error etc.: fusionnées
+ * Nouvelles exceptions plus fines basées sur errno : FileNotFoundError, BlockingIOError, etc.
+ * Conception délicate (préserver la compatibilité)
+ * Écriture longue : recension des usages, argumentaire
+ * Discussion plus aisée que prévu : débats sur le nommage
 
 CPython : ajout de fonctionnalités
 ----------------------------------
@@ -172,11 +202,3 @@ Prix de la portabilité
  * Soucis avec threads et signaux, notamment sous BSD
  * Fonctions récentes d'un noyau, ex: Linux >= 2.6.28
  * #ifdef et if dans le code
-
-Contribuer à Python
--------------------
-
- * devguide
- * core-mentorship
- * Pas besoin du droit de commit (push)
-
