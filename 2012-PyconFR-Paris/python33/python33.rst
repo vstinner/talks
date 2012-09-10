@@ -11,19 +11,32 @@ yield from: PEP 380
 Langage
 -------
 
- * Ajout de list.copy() et list.clear(), et pareil pour bytearray
- * u"hé hé" est à nouveau accepté dans Python 3.3
+ * Ajout de list.copy() et list.clear(), pareil pour bytearray
+ * u"chaîne unicode" est à nouveau accepté dans Python 3.3
 
 
-Suppresssin exception context: PEP 409
---------------------------------------
+Suppresssion contexte exception : PEP 409
+-----------------------------------------
 
  * raise ValueError("oups!") from None
+
+ipaddress
+---------
+
+ * IPv4Address('192.0.2.6') in IPv4Network('192.0.2.0/28')
+ * IPv4Address('192.0.2.0') <= IPv4Network('192.0.2.0/24')
+
+lzma
+----
+
+ * compress data using the XZ / LZMA algorithm
+ * zlib, gzip, bz2, lzma, zipfile, tarfile
 
 virtualenv: PEP 405
 -------------------
 
- * pyvenv
+ * module venv
+ * programme pyvenv
 
 Qualified name: PEP 3155
 ------------------------
@@ -46,9 +59,9 @@ Unicode: PEP 393
 ----------------
 
  * Python 2.x : "abc" une chaîne d'octets, "abc" consomme 3 octets
- * Python 3.2 : "abc" est une chaîne de caractères, "abc" consomme 6 ou 12 octets
- * Python 3.3 : "abc" consomme 3 octets
- * Python 3.2 : "\U0010ffff"[0] donne '\udbff' (surrogate) sous Windows
+ * Python 3.2 : "abc" est une chaîne de caractères, "abc" consomme 6 ou 12 octets (2 à 4 fois plus de mémoire que Python 2)
+ * Python 3.3 : "abc" consomme 3 octets comme Python 2 !
+ * Python 3.2 : "\U0010ffff"[0]='\udbff' (surrogate) en len("\U0010ffff")=2 sous Windows
  * Python < 3.3 : code complexe pour gérer les caractères non-BMP, problèmes
    avec le mode narrow
  * Python 3.3 : "\U0010ffff"[0] donne toujours "\U0010ffff"
@@ -136,6 +149,11 @@ Next
 
  * os : extended attributes, ex: os.getxattr() => SE Linux
 
+Optimisation taille objets
+--------------------------
+
+ * More compact attribute dictionaries.
+
 Thread + signal
 ---------------
 
@@ -146,15 +164,27 @@ Thread + signal
  * sys.thread_info
  * sys.thread_info(name='pthread', lock='semaphore', version='NPTL 2.10.2')
 
+Debug: nouveau module faulthandler
+----------------------------------
+
+ * SIGSEGV, SIGABRT, SIGFPE, SIGILL
+ * Timeout
+ * Appel explicite
+
 Securité
 --------
 
  * crypt : support du sel
  * ssl: RAND_bytes(), RAND_pseudo_bytes(): PRNG cryptographiques
+ * Hash randomization is switched on by default.
+
+PEP 3118: New memoryview implementation and buffer protocol documentation
+-------------------------------------------------------------------------
+
+ * TODO
 
 Misc
 ----
 
  * collections.ChainMap
- * module faulthandler
 
