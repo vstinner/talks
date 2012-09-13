@@ -12,24 +12,128 @@ Sommaire
  * Côté technique : C, buildbot
  * Comment contribuer
 
-Python : le langage
--------------------
-
- * Python Enhancement Proposals
-
-Python / CPython : une communauté ouverte
------------------------------------------
+Communauté ouverte
+------------------
 
  * Développement de Python (langage + stdlib) ~= développement CPython
- * Toutes les discussions sont publiques et ouvertes à tous
- * ... sauf sécu, infrastructure
+ * Discussions publiques et ouvertes à tous
+ * ... sauf sécurité et infrastructure
 
-Contribuer à Python
+Liste python-ideas
+------------------
+
+ * Brainstorm
+ * Mauvaises idées proposées par manque de connaissance
+   du langage ou de la bibliothèque standard
+ * Changement de syntaxe rarement acceptés
+ * Les meilleurs idées donnent lieu à des PEP
+
+Liste python-dev
+----------------
+
+ * Propositions et questions concrètes liées au développement
+ * Commentaires sur les commits
+ * Discussions sur les PEP en cours
+
+bugs.python.org
+---------------
+
+ * Diagnostique d'un bug
+ * Relecture des patchs
+ * Choix parmis plusieurs solutions techniques
+
+*******************
+
+CPython : ajout de fonctionnalités
+----------------------------------
+
+ * Python Enhancement Proposals (PEP)
+ * ... ou pas PEPs
+ * implémentation discutée sur le bug tracker
+ * revue de code
+ * commit sur la branche "default" (version 3.N+1)
+
+CPython : améliorations
+-----------------------
+
+ * performance, consommation mémoire, stabilité, etc.
+ * même processus que les ajouts de fonctionnalités
+
+CPython : correction de bugs
+----------------------------
+
+ * implémentation discutée sur le bug tracker
+ * revue de code
+ * commit sur les branches "2.X", "3.N" et "default" (version 3.N+1)
+
+PEP 410 : nanosecondes
+----------------------
+
+ * Use decimal.Decimal type for timestamps
+ * Précision d'une nanoseconde
+ * Bug os.utime(os.stat().st_mtime)
+ * 7 types différents proposés dans la PEP
+
+PEP 410 : rejettée
+------------------
+
+ * Rejetée par Guido von Rossum
+ * Précision théorique, inaccessible en pratique
+ * Ajout d'une complexité injustifiée
+ * os.stat() et os.utime() modifiés pour avoir le timestamp en nanosecondes (int)
+
+PEP refusées
+------------
+
+ * Besoin trop spécifique
+ * Manque de cas d'utilisation
+ * Solution existante satisfaisante
+ * Refus servant à conserver un Langage homogène, simple et cohérent
+ * PEPs abandonnées, retirées
+ * PEPs différées
+
+PEP 3151
+--------
+
+ * Refonte de la hiérarchie d'exceptions d'entrées-sorties
+ * IOError, OSError, EnvironmentError, socket.error etc.: fusionnées
+ * Nouvelles exceptions plus fines basées sur errno : FileNotFoundError, BlockingIOError, etc.
+
+PEP 3151 : acceptée
 -------------------
 
- * devguide
- * core-mentorship
- * Pas besoin du droit de commit (push)
+ * Conception délicate (préserver la compatibilité)
+ * Écriture longue : recension des usages, argumentaire
+ * Discussion plus aisée que prévu : débats sur le nommage
+
+PEP 418
+-------
+
+ * Ajout au module time de Python 3.3 :
+ * time.get_clock_info(name)
+ * time.monotonic()
+ * time.perf_counter()
+ * time.process_time()
+
+PEP 418 : débat houleux
+-----------------------
+
+ * Débat des plusieurs semaines sur python-dev avec une dizaine d'intervenants
+ * Débat sur le vocabulaire : "accuracy", "monotonic", "steady"
+ * Débat sur monotonic() : fallback sur time.time() ou non ?
+ * Difficile définition des fonctions (documentation)
+
+PEP 418 : acceptée
+------------------
+
+ * Après de nombreuses révisions de la PEP,
+ * PEP acceptée dans Python 3.3
+ * PEP avec des nombreuses annnexes sur les OS, horloges matérielles et
+   performances
+
+
+
+*******************
 
 CPython : l'implémentation
 --------------------------
@@ -45,75 +149,6 @@ Amélioration du langage : les PEPs
  * L'auteur rédige une PEP
  * La PEP sert de base de travail pour la discussion
  * PEP rejetée ou acceptée
-
-python-ideas
-------------
-
- * Brainstorm
- * Mauvaises idées proposées par manque de connaissance
-   du langage ou de la bibliothèque standard
- * Changement de syntaxe rarement acceptés
- * PEP 3150 (given) et PEP 403 (@in) rejettées
- * Les meilleurs idées donnent lieu à des PEP
-
-python-dev
-----------
-
- * Propositions et questions concrètes liées au développement
- * Commentaires sur les commits
-
-PEP rejetée : PEP 410
----------------------
-
- * Use decimal.Decimal type for timestamps
- * Précision d'une nanoseconde
- * Bug os.utime(os.stat().st_mtime)
- * 7 types différents proposés dans la PEP
- * Rejetée par Guido car ajoute de la complexité alors que la précision d'une nanoseconde n'est pas nécessaire ni disponible
- * os.stat() et os.utime() modifiés pour avoir le timestamp en nanosecondes (int)
-
-PEP acceptée : PEP 418
-----------------------
-
- * Ajout des fonctions get_clock_info(name), monotonic(), perf_counter() et process_time() au module time de Python 3.3
- * Débat des plusieurs semaines sur python-dev avec une dizaine d'intervenants
- * Débat sur le vocabulaire : "accuracy", "monotonic", "steady"
- * Débat sur monotonic() : fallback ou pas ?
- * Difficile définition des fonctions (documentation)
- * PEP avec des nombreuses annnexes sur les OS, horloges matérielles, performances
- * Acceptée dans Python 3.3
-
-PEP acceptée : PEP 3151
------------------------
-
- * Refonte de la hiérarchie d'exceptions d'entrées-sorties
- * IOError, OSError, EnvironmentError, socket.error etc.: fusionnées
- * Nouvelles exceptions plus fines basées sur errno : FileNotFoundError, BlockingIOError, etc.
- * Conception délicate (préserver la compatibilité)
- * Écriture longue : recension des usages, argumentaire
- * Discussion plus aisée que prévu : débats sur le nommage
-
-CPython : ajout de fonctionnalités
-----------------------------------
-
- * PEPs
- * ... ou pas PEPs
- * implémentation discutée sur le bug tracker
- * revue de code
- * commit sur la branche "default" (version 3.N+1)
-
-CPython : améliorations
------------------------
-
- * de performance, de consommation mémoire, etc.
- * même processus que les ajouts de fonctionnalités
-
-CPython : correction de bugs
-----------------------------
-
- * implémentation discutée sur le bug tracker
- * revue de code
- * commit sur les branches "2.X", "3.N" et "default" (version 3.N+1)
 
 CPython : suite de tests
 ------------------------
@@ -202,3 +237,11 @@ Prix de la portabilité
  * Soucis avec threads et signaux, notamment sous BSD
  * Fonctions récentes d'un noyau, ex: Linux >= 2.6.28
  * #ifdef et if dans le code
+
+Contribuer à Python
+-------------------
+
+ * devguide
+ * core-mentorship
+ * Pas besoin du droit de commit (push)
+
