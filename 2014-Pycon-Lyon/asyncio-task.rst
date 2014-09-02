@@ -4,12 +4,6 @@ asyncio kernel: callback
 Callback
 --------
 
-Example::
-
-    def hello():
-        print("Hello World")
-    call_soon(hello)
-
 Event loop::
 
     class CallbackEventLoop:
@@ -19,21 +13,22 @@ Event loop::
         def call_soon(self, func):
             self.callbacks.append(func)
 
-        def scheduler_callback():
+        def execute_callback(self):
             for cb in self.callbacks:
                 cb()
             self.callbacks.clear()
-
-Call at (and call later)
-------------------------
 
 Example::
 
     def hello():
         print("Hello World")
 
-    # Call hello() in 5 seconds
-    call_at(time.time() + 5, hello)
+    loop = CallbackEventLoop()
+    loop.call_soon(hello)
+    loop.execute_callback()
+
+Call at (and call later)
+------------------------
 
 Event loop::
 
@@ -45,40 +40,45 @@ Event loop::
         def call_at(self, when, func):
             self.timers.append((when, func))
 
-        def scheduler_timer(self):
+        def execute_timers(self):
             now = time.time()
             new_timers = []
-            for index, (when, func) in self.timers:
-                if when >= now:
+            for when, func in self.timers:
+                if when <= now:
                     self.call_soon(func)
                 else:
                     new_timers.append((when, func))
             self.timers = new_timers
 
-            self.scheduler_callback()
+            self.execute_callback()
 
     # Real implementation: comparable TimerHandle and heapq
 
-Call later:
+Example::
 
-    def call_later(delay, func):
+    def hello():
+        print("Hello World")
+
+    # Call hello() in 5 seconds
+    loop = TimerEventLoop()
+    loop.call_at(time.time() + 5, hello)
+    time.sleep(5)
+    loop.execute_timers()
+
+Call later::
+
+    def call_later(self, delay, func):
         at = time.time() + delay
-        call_at(at, func)
+        self.call_at(at, func)
+
+
 
 Selector
 --------
 
-Example::
-
-    def reader(sock):
-        print("Received:", sock.recv(100))
-
-    # Wait data from a socket
-    loop.add_reader(sock, reader)
-
 Event loop::
 
-    class SelectEventLoop(TimerEventLoop):
+    class SelectorEventLoop(TimerEventLoop):
         def __init__(self):
             super().__init__()
             self.selector = selectors.Selector()
@@ -86,42 +86,222 @@ Event loop::
         def add_reader(self, sock, func):
             self.selector.register(sock, selectors.EVENT_READ, func)
 
-        def scheduler_select(timeout=0.0):
+        def select(self):
+            if self.callbacks:
+                # already something to do
+                timeout = 0
+            else:
+                timeout = <timeout of the next timer>
             events = self.selector.select(timeout)
             for key, mask in events:
                 func = key.data
                 self.call_soon(func, key.fileobj)
+            self.execute_timers()
 
-    # Real implementation: comparable TimerHandle and heapq
+Example::
 
-All together
-------------
+    def reader(sock):
+        print("Received:", sock.recv(100))
 
-Full event loop::
+    rsock, wsock = socket.socketpair()
+    loop = SelectorEventLoop()
 
-    class FullEventLoop(SelectEventLoop):
-        def _run_once(self):
-            if self.callbacks:
-                timeout = 0
-            else:
-                timeout = <timeout of the next timer>
-            self.scheduler_select(timeout)
-            self.scheduler_timer()
+    loop.add_reader(rsock, reader)
+    wsock.send(b'abc')
+    loop.select()
+
+
+Run forever, stop
+-----------------
+
+Blocking event loop::
+
+    class StopEventLoop(Exception):
+        pass
+
+    class EventLoop(SelectEventLoop):
+        def _stop(self):
+            raise StopEventLoop
+
+        def stop(self):
+            self.call_soon(self._stop)
 
         def run_forever(self):
-            while 1:
-                self._run_once()
+            try:
+                while 1:
+                    self.select()
+            except StopEventLoop:
+                pass
 
     # missing: exception to stop the event loop
 
 
+Future
+======
+
+::
+
+    class Future:
+        def __init__(self):
+            self.callbacks = []
+            self._result = None
+
+        def add_done_callback(self, func):
+            self.callbacks.append(func)
+
+        def set_result(self, result):
+            self._result = result
+            for func in self.callbacks:
+                func(self)
+
+        def result(self):
+            return self._result
+
+        def __iter__(self):
+            yield self
+
+    # TODO: handle exception, result() must fail if there is no result
+
+
+Future: integration with the event loop
+=======================================
+
+::
+
+    class LoopFuture(Future):
+        def set_result(self, result):
+            self._result = result
+            for func in self.callbacks:
+                loop.call_soon(func, self)
 
 Python generator and yield-from
 ===============================
 
-xxx
+Generator
+---------
+
+::
+
+    def demo_gen():
+        print("start")
+        yield 1
+        print("stop")
+        return 2
+
+    gen = demo_gen()
+    # not started yet
+    print(gen.next())  # print 1
+    # gen stopped again
+    try:
+        gen.next()
+    except StopIteration as exc:
+        print(exc.value)   # print 2
+
+yield-from
+----------
+
+::
+
+    def producer():
+        yield "Hello"
+        yield "World!"
+
+    def wrapper():
+        print("enter wrapper")
+        yield from producer()
+        print("exit wrapper")
+
+    for item in wrapper():
+        print(item)
+
+Output::
+
+    enter wrapper
+    Hello
+    World!
+    exit wrapper
+
 
 asyncio Task
 ============
 
-xxx
+Coroutine
+---------
+
+A coroutine is "just" a generator::
+
+    def my_coroutine(future):
+        yield from future
+        res = future.result()
+
+Task
+----
+
+Schedule a coroutine::
+
+    class Task:
+        def __init__(self, coro):
+            self.coro = coro
+
+        def step(self):
+            try:
+                next(self.coro)
+            except StopIteration:
+                pass
+
+    def coroutine():
+        print("step 1")
+        yield from []  # hack to interrupt the coroutine
+        print("step 2")
+
+    task = Task(coroutine())
+    task.step() # print "step 1"
+    task.step() # print "step 2"
+
+
+Coroutine waiting for a future
+------------------------------
+
+::
+
+    class Task:
+        def __init__(self, coro):
+            self.coro = coro
+
+        def step(self):
+            try:
+                result = next(self.coro)
+            except StopIteration:
+                pass
+            else:
+                if isinstance(result, Future):
+                    result.add_done_callback(self._wakeup)
+
+    def coroutine(future):
+        print("wait future")
+        yield from future
+        print("future result", future.result())
+
+    future = Future()
+    task = Task(coroutine(future))
+    task.step()            # print "waiting future"
+    future.set_result(5)   # print "future result: 5"
+
+
+Task: integration with the event loop
+-------------------------------------
+
+::
+
+    class LoopTask(Task):
+        def __init__(self, coro):
+            super().__init__()
+            loop.call_soon(self.step)
+
+        def step(self):
+            try:
+                next(self.coro)
+            except StopIteration:
+                pass
+            else:
+                loop.call_soon(self.step)
