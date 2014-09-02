@@ -228,7 +228,7 @@ asyncio Task
 Coroutine
 ---------
 
-A coroutine is "just" a generator::
+A coroutine is a generator::
 
     def my_coroutine(future):
         yield from future
@@ -275,7 +275,10 @@ Coroutine waiting for a future
                 pass
             else:
                 if isinstance(result, Future):
-                    result.add_done_callback(self._wakeup)
+                    result.add_done_callback(self.wakeup)
+
+        def wakeup(self, fut):
+            self.step()
 
     def coroutine(future):
         print("wait future")
