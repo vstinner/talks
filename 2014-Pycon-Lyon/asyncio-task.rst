@@ -280,6 +280,8 @@ Coroutine waiting for a future
         def wakeup(self, fut):
             self.step()
 
+    # TODO: support exception
+
     def coroutine(future):
         print("wait future")
         yield from future
@@ -308,3 +310,5 @@ Task: integration with the event loop
                 pass
             else:
                 loop.call_soon(self.step)
+
+    # and use LoopFuture, not Future
