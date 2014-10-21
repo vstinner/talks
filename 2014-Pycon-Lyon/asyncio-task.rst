@@ -1,3 +1,17 @@
+http://www.pycon.fr/2014/schedule/
+Dimanche 11:30, Exploration de la boucle d'événement asyncio
+http://www.pycon.fr/2014/schedule/presentation/5/
+
+
+Discover the asyncio event loop
+===============================
+
+* How asyncio is implemented
+* Code snippets close to but different than asyncio
+* No error handling
+* No optimization
+
+
 asyncio kernel: callback
 ========================
 
@@ -14,9 +28,10 @@ Event loop::
             self.callbacks.append(func)
 
         def execute_callback(self):
-            for cb in self.callbacks:
+            callbacks = self.callbacks
+            self.callbacks = []
+            for cb in callbacks:
                 cb()
-            self.callbacks.clear()
 
 Example::
 
@@ -86,16 +101,24 @@ Event loop::
         def add_reader(self, sock, func):
             self.selector.register(sock, selectors.EVENT_READ, func)
 
-        def select(self):
+        def _compute_timeout(self):
             if self.callbacks:
                 # already something to do
-                timeout = 0
+                return 0
+            elif self.timers:
+                next_timer = min(self.timers)[0]
+                return max(next_timer - time.time(), 0.0)
             else:
-                timeout = <timeout of the next timer>
+                # blocking call
+                return None
+
+        def select(self):
+            timeout = self._compute_timeout()
             events = self.selector.select(timeout)
             for key, mask in events:
                 func = key.data
                 self.call_soon(func, key.fileobj)
+
             self.execute_timers()
 
 Example::
