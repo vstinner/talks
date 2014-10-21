@@ -192,10 +192,14 @@ Future: integration with the event loop
 ::
 
     class LoopFuture(Future):
+        def __init__(self, loop):
+            super().__init__()
+            self.loop = loop
+
         def set_result(self, result):
             self._result = result
             for func in self.callbacks:
-                loop.call_soon(func, self)
+                self.loop.call_soon(func, self)
 
 Python generator and yield-from
 ===============================
@@ -322,7 +326,7 @@ Task: integration with the event loop
 ::
 
     class LoopTask(Task):
-        def __init__(self, coro):
+        def __init__(self, coro, loop):
             super().__init__()
             loop.call_soon(self.step)
 
