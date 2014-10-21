@@ -181,7 +181,7 @@
        x2="879.4292"
        y2="707.26031"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.92328015,0,0,1.0780994,2.0180753,-29.194876)" />
+       gradientTransform="matrix(0.89429716,0,0,1.0780994,32.938307,-29.194876)" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient12126-6"
@@ -221,9 +221,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.60552385"
-     inkscape:cx="254.60577"
-     inkscape:cy="350.37744"
+     inkscape:zoom="1.2110477"
+     inkscape:cx="420.42183"
+     inkscape:cy="319.525"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -270,13 +270,13 @@
          x="579.22931"
          y="522.05145">test_coro() coroutine</tspan></text>
     <rect
-       style="fill:url(#linearGradient12140);fill-opacity:1;fill-rule:nonzero;stroke:#752828;stroke-width:2.80625844;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:url(#linearGradient12140);fill-opacity:1;fill-rule:nonzero;stroke:#752828;stroke-width:2.76186109;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect11120-3"
-       width="407.10336"
+       width="394.32385"
        height="198.38536"
-       x="579.90735"
+       x="592.68689"
        y="534.57367"
-       rx="20.574547"
+       rx="19.928684"
        ry="20.564289" />
     <text
        xml:space="preserve"
@@ -364,21 +364,6 @@
          x="611.867"
          y="697.38422"
          id="tspan3149">print(&quot;end&quot;)</tspan></text>
-    <g
-       id="g9786"
-       transform="translate(-4.9543878,-79.270205)">
-      <path
-         inkscape:connector-curvature="0"
-         id="path5299-9"
-         d="m 537.75565,716.19827 63.30473,0"
-         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:none" />
-      <path
-         sodipodi:nodetypes="ccccc"
-         inkscape:connector-curvature="0"
-         id="path7308-2"
-         d="m 583.97846,702.96335 c 0,0 29.70511,13.18237 35.20638,13.65033 -5.69774,-0.46796 -35.33543,12.06827 -35.33543,12.06827 20.43331,-13.57081 0.12908,-25.7186 0.12908,-25.7186 z"
-         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" />
-    </g>
     <rect
        style="fill:none"
        id="rect9782"
@@ -389,5 +374,24 @@
        rx="0"
        ry="0"
        transform="translate(0,308.2677)" />
+    <g
+       id="g12486"
+       transform="translate(-25.597671,-124.68543)">
+      <rect
+         ry="0"
+         rx="0"
+         y="760.67163"
+         x="554.41266"
+         height="9.1309032"
+         width="56.546589"
+         id="rect12135"
+         style="fill:#ffd53d;fill-opacity:1;stroke:#000000;stroke-width:2.65151644;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <path
+         sodipodi:nodetypes="ccccc"
+         inkscape:connector-curvature="0"
+         id="path7308-2-1"
+         d="m 598.75978,751.32266 c 0,0 29.70511,13.18237 35.20638,13.65033 -5.69774,-0.46796 -35.33543,12.06827 -35.33543,12.06827 -0.20997,-1.18484 0.12908,-25.7186 0.12908,-25.7186 z"
+         style="fill:#ffd53d;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
   </g>
 </svg>
