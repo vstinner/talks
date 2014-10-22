@@ -222,7 +222,7 @@
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
      inkscape:zoom="1.2110477"
-     inkscape:cx="492.61074"
+     inkscape:cx="494.2622"
      inkscape:cy="341.16977"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -316,7 +316,7 @@
          x="44.878723"
          y="742.45496"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;font-family:Comfortaa;-inkscape-font-specification:Comfortaa"
-         id="tspan3963">    gen.next()</tspan><tspan
+         id="tspan3963">    next(gen)</tspan><tspan
          sodipodi:role="line"
          x="44.878723"
          y="792.45496"
