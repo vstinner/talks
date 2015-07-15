@@ -3,5 +3,124 @@ asyncio launch
 
 * Python 3.4: March 2014
 * Almost naked: very few libraries
-*
 
+Move to Github
+==============
+
+* Move from code.google.com to Github
+* code.google.com is closing
+* Github is widely used, pull requests are simpler
+* Use Git instead of Mercurial: Git is more popular
+
+Discussion
+==========
+
+* python-tulip mailing list (Google Group)
+* #asyncio IRC channel on the Freenode network
+* Python bug tracker (bugs.python.org)
+
+Libraries
+=========
+
+ * aiofiles: File support for asyncio
+ * aiohttp: http client and server infrastructure for asyncio
+ * aiodns: Async DNS resolver
+ * aiorwlock: Read write lock for asyncio.
+ * aioutils: Python3 Asyncio Utils, Group (like gevent.pool.Group), Pool (like event.poo.Pool), Bag and OrderedBag.
+ * tasklocals: Task-local variables
+
+Clients
+=======
+
+ * Asterisk: panoramisk, a library based on python’s asyncio to play with asterisk's manager
+ * !ElasticSearch: aioes, client library
+ * IRC: irc3, plugable irc client library based on python's asyncio
+ * IRC: bottom, asyncio-based rfc2812-compliant IRC Client
+ * XMPP (Jabber): slixmpp, SleekXMPP (XMPP Library) fork using asyncio, for poezio
+
+Databases
+=========
+
+SQL drivers:
+
+ * MySQL: aiomysql, MySQL driver
+ * PostgreSQL: aiopg, PostgreSQL client library built on top of psycopg2
+
+NoSQL and key-value store drivers:
+
+ * CouchDB: aiocouchdb, CouchDB client
+ * memcached: aiomemcache, minimal memcached client
+ * MongoDB: asyncio-mongo, MongoDB driver (ported from Twisted)
+ * redis: asyncio-redis, Redis client
+ * redis: aioredis, Yet another Redis client
+
+ORM:
+
+ * peewee: peewee-async, library providing asynchronous interface powered by asyncio for peewee ORM.
+
+Web frameworks
+==============
+
+ * aiopyramid: Tools for running pyramid using asyncio.
+ * aiowsgi: minimalist wsgi server using asyncio
+ * API hour: Write efficient network daemons (HTTP, SSH, ...) with ease.
+ * AutobahnPython: !WebSocket and WAMP framework
+ * interest: event-driven web framework on top of aiohttp/asyncio.
+ * muffin: A web framework based on Asyncio stack (early alpha)
+ * nacho: web framework
+ * Pulsar: Event driven concurrent framework for python. With pulsar you can write asynchronous servers performing one or several activities in different threads and/or processes.
+ * rainfall: another web framework
+ * Vase: web framework
+ * websockets: Websockets library
+ * WebSocket-for-Python: another websocket library
+
+ Others: ...
+
+Integration with other application libraries
+============================================
+
+ * aioamqp: AMQP implementation using asyncio
+ * gunicorn: gunicorn has gaiohttp worker built on top of aiohttp library
+
+Run asyncio on top of
+=====================
+
+ * eventlet: aiogreen, asyncio API implemented on top of eventlet
+ * gevent: aiogevent, asyncio API implemented on top of gevent
+
+Adapters for other event loops
+==============================
+
+Some people have already written adapters for integrating asyncio with other
+async I/O frameworks.
+
+ * eventlet: greenio, Greenlets support for asyncio (PEP 3156)
+ * gevent: tulipcore, run gevent code on top of asyncio, alternative gevent core loop
+ * GLib: gbulb, event loop based on GLib
+ * libuv: aiouv, an event loop implementation for asyncio based on pyuv
+ * Qt: Quamash, implementation of the PEP 3156 Event-Loop with Qt.
+ * Tornado has experimental asyncio support built right into it.
+ * ZeroMQ: aiozmq, ZeroMQ integration with asyncio
+ * ZeroMQ: Zantedeschia, experimental alternative integration between asyncio and ZeroMQ sockets.
+
+Misc
+====
+
+ * aiocron: Crontabs for asyncio
+ * aiomas: A library for multi-agent systems and RPC based on asyncio
+ * aiotest: test suite to validate an implementation of the asyncio API
+ * aioprocessing: A Python 3.3+ library that integrates the multiprocessing module with asyncio
+ * blender-asyncio: Asyncio Bridge for Blender Python API
+ * ipython-yf:  An ipython extension to make it asyncio compatible
+ * aiogearman: asyncio gearman support. Gearman provides a generic application framework to farm out work to other machines or processes that are better suited to do the work.
+ * Serial port using the serial module, see using serial port in python3 asyncio at Stackoverflow, serial.Serial can be registered with loop.add_reader().
+
+Production Ready?
+=================
+
+* aiohttp is battle tested
+
+Questions
+=========
+
+* asyncio.org
