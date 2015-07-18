@@ -1,16 +1,19 @@
+Durata: 30 minuti (inc. Q&A)
+
 asyncio launch
 ==============
 
 * Python 3.4: March 2014
 * Almost naked: very few libraries
 
-Move to Github
-==============
+asyncio moved to Github
+=======================
 
 * code.google.com is closing
 * Move from code.google.com to Github
 * Use Git instead of Mercurial: Git is more popular
 * Github is widely used, pull requests are simpler
+* At least 26 contributors to asyncio
 
 Discussion
 ==========
@@ -22,8 +25,91 @@ Discussion
 aiohttp
 =======
 
+* Most famous and successful project
+* HTTP Client and HTTP Server.
+* (HTTPS support)
+* Server WebSockets and Client WebSockets out-of-the-box
+* Web-server has Middlewares and pluggable routing
+* https://aiohttp.rtfd.org
+
 * aiohttp: http client and server infrastructure for asyncio
 * aiohttp is battle tested
+
+Client::
+
+    @asyncio.coroutine
+    def fetch_page(url):
+        response = yield from aiohttp.request('GET', url)
+        assert response.status == 200
+        return (yield from response.read())
+
+SQL drivers
+===========
+
+ * MySQL: aiomysql
+ * PostgreSQL: aiopg (based on psycopg2)
+
+::
+
+    dsn = 'dbname=aiopg user=aiopg password=passwd host=127.0.0.1'
+
+    @asyncio.coroutine
+    def go():
+        pool = yield from aiopg.create_pool(dsn)
+        with (yield from pool.cursor()) as cur:
+            yield from cur.execute("SELECT 1")
+            ret = yield from cur.fetchone()
+            assert ret == (1,)
+
+ORM
+===
+
+ * peewee ORM: peewee-async
+ * aiopg.sa: SQLAlchemy functional SQL layer based on aiopg
+
+Key-value store
+===============
+
+ * memcached: aiomemcache, minimal memcached client
+ * redis: aioredis
+ * redis: asyncio-redis
+
+aioredis::
+
+    # No pipelining
+    @asyncio.coroutine
+    def wait_each_command():
+        foo = yield from redis.get('foo')
+        bar = yield from redis.incr('bar')
+        return foo, bar
+
+    # Sending multiple commands and then gathering results
+    @asyncio.coroutine
+    def pipelined():
+        get = redis.get('foo')
+        incr = redis.incr('bar')
+        foo, bar = yield from asyncio.gather(get, incr)
+        return foo, bar
+
+NoSQL
+=====
+
+ * CouchDB: aiocouchdb
+ * MongoDB: asyncio-mongo (ported from Twisted)
+
+Clients
+=======
+
+Unsorted:
+
+  * AMQP: aioamqp: AMQP implementation using asyncio (Used by RabbitMQ)
+  * AMI: panoramisk, a library to play with Asterisk's protocols: AMI and FastAGI
+  * DNS: aiodns: Async DNS resolver
+  * ElasticSearch: aioes: ElasticSearch client library
+  * Etcd: aioetcd: Coroutine-based etcd client
+  * Google Hangouts: hangups: Client for Google Hangouts
+  * SSH: AsyncSSH: SSH client and server implementation
+  * XMPP (Jabber): slixmpp, SleekXMPP (XMPP Library) fork using asyncio, for poezio
 
 Clients
 =======
@@ -34,25 +120,13 @@ Clients
  * IRC: bottom, asyncio-based rfc2812-compliant IRC Client
  * XMPP (Jabber): slixmpp, SleekXMPP (XMPP Library) fork using asyncio, for poezio
 
-Databases
-=========
+Websockets
+==========
 
-SQL drivers:
-
- * MySQL: aiomysql, MySQL driver
- * PostgreSQL: aiopg, PostgreSQL client library built on top of psycopg2
-
-NoSQL and key-value store drivers:
-
- * CouchDB: aiocouchdb, CouchDB client
- * memcached: aiomemcache, minimal memcached client
- * MongoDB: asyncio-mongo, MongoDB driver (ported from Twisted)
- * redis: asyncio-redis, Redis client
- * redis: aioredis, Yet another Redis client
-
-ORM:
-
- * peewee: peewee-async, library providing asynchronous interface powered by asyncio for peewee ORM.
+ * aiohttp.web: a Flask-like API to build quickly HTTP applications, made by the creators of aiohttp.
+ * AutobahnPython: WebSocket and WAMP framework
+ * websockets: Websockets library
+ * WebSocket-for-Python: another websocket library
 
 Web frameworks
 ==============
@@ -71,6 +145,24 @@ Web frameworks
  * WebSocket-for-Python: another websocket library
 
  Others: ...
+
+Servers
+=======
+
+ * FastAGI: panoramisk, a library to play with Asterisk's protocols: AMI and FastAGI
+ * IRC: irc3d, irc server library based on irc3
+ * HTTP: aiohttp: http client and server infrastructure for asyncio
+ * SSH: AsyncSSH: SSH client and server implementation
+
+aiohttp web server::
+
+    @asyncio.coroutine
+    def hello(request):
+        return web.Response(body=b"Hello, world")
+
+    app = web.Application()
+    app.router.add_route('GET', '/', hello)
+
 
 Integration with other application libraries
 ============================================
@@ -149,20 +241,26 @@ Trollius
 * Work on Python 2.6 - 3.6
 * Trollius 2.0
 
+Links
+=====
+
+* http://asyncio.org/: Libraries, Docs, Talks, Tutorials, Blogs
+* ThirdParty wiki page
+* https://github.com/python/asyncio/wiki/ThirdParty
+
 How can you help?
 =================
 
 * Need tutorials and more documentation on asyncio!
 * https://docs.python.org/dev/library/asyncio.html is more a boring reference
   API doc
-* Port more stdlib modules to asyncio: ftplib, smtplib, telnetlib,
-  xmlrpclib, etc.
+* Port more stdlib modules to asyncio: ftplib, poplib, imaplib, nntplib,
+  smtplib, smtpd, telnetlib, xmlrpc, etc.
 * Interoperability with Twisted
 
 Questions
 =========
 
-* asyncio.org
 
 
 Sources of photos
