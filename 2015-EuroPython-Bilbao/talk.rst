@@ -124,3 +124,24 @@ Questions
 =========
 
 * asyncio.org
+
+
+Sources of photos
+=================
+
+* https://www.flickr.com/photos/gotovan/7126982137/
+* https://www.flickr.com/photos/pankseelen/6856818098/
+* https://www.flickr.com/photos/ewestrum/4590703575/
+* https://www.flickr.com/photos/keroyama/13793000744/
+* https://www.flickr.com/photos/freetheimage/13197345653/
+* https://www.flickr.com/photos/31064702@N05/3558517884/
+* https://www.flickr.com/photos/aidanmorgan/2256230386/
+* https://www.flickr.com/photos/duncanh1/7335557978/
+* https://www.flickr.com/photos/ewestrum/4590702749/
+* https://www.flickr.com/photos/sis/490541142/
+* https://www.flickr.com/photos/pankseelen/5468062766/
+* https://www.flickr.com/photos/pankseelen/5470825013/in/photostream/
+* https://www.flickr.com/photos/pankseelen/5468062632/in/photostream/
+
+
+
