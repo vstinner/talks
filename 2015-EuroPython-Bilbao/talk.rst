@@ -7,10 +7,10 @@ asyncio launch
 Move to Github
 ==============
 
-* Move from code.google.com to Github
 * code.google.com is closing
-* Github is widely used, pull requests are simpler
+* Move from code.google.com to Github
 * Use Git instead of Mercurial: Git is more popular
+* Github is widely used, pull requests are simpler
 
 Discussion
 ==========
@@ -19,15 +19,11 @@ Discussion
 * #asyncio IRC channel on the Freenode network
 * Python bug tracker (bugs.python.org)
 
-Libraries
-=========
+aiohttp
+=======
 
- * aiofiles: File support for asyncio
- * aiohttp: http client and server infrastructure for asyncio
- * aiodns: Async DNS resolver
- * aiorwlock: Read write lock for asyncio.
- * aioutils: Python3 Asyncio Utils, Group (like gevent.pool.Group), Pool (like event.poo.Pool), Bag and OrderedBag.
- * tasklocals: Task-local variables
+* aiohttp: http client and server infrastructure for asyncio
+* aiohttp is battle tested
 
 Clients
 =======
@@ -115,10 +111,53 @@ Misc
  * aiogearman: asyncio gearman support. Gearman provides a generic application framework to farm out work to other machines or processes that are better suited to do the work.
  * Serial port using the serial module, see using serial port in python3 asyncio at Stackoverflow, serial.Serial can be registered with loop.add_reader().
 
-Production Ready?
+Libraries
+=========
+
+ * aiofiles: File support for asyncio
+ * aiodns: Async DNS resolver
+ * aiorwlock: Read write lock for asyncio.
+ * aioutils: Python3 Asyncio Utils, Group (like gevent.pool.Group), Pool (like event.poo.Pool), Bag and OrderedBag.
+ * tasklocals: Task-local variables
+
+API-Hour benchmark
 =================
 
-* aiohttp is battle tested
+* Django, Flask, API-Hour
+* Round 5: 50 simultaneous connections with wrk
+* between 3000 and 3600 requests/second for API-Hour (asyncio)
+* between 600 and 628 requests/second for Django and Flask
+* All benchmarks at http://blog.gmludo.eu/
+
+API-Hour benchmark
+=================
+
+* Simple JSON document
+* API-Hour: around 395,847 requests/second
+* Django, Flask: between 70,598 and 79,598 requests/second
+* API-Hour handles around 5x more requests per second
+
+API-Hour benchmark
+=================
+
+* All benchmarks at http://blog.gmludo.eu/
+
+Trollius
+========
+
+* Trollius is the Python 2 port of asyncio
+* Work on Python 2.6 - 3.6
+* Trollius 2.0
+
+How can you help?
+=================
+
+* Need tutorials and more documentation on asyncio!
+* https://docs.python.org/dev/library/asyncio.html is more a boring reference
+  API doc
+* Port more stdlib modules to asyncio: ftplib, smtplib, telnetlib,
+  xmlrpclib, etc.
+* Interoperability with Twisted
 
 Questions
 =========
