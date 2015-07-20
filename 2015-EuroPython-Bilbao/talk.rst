@@ -1,10 +1,35 @@
 Durata: 30 minuti (inc. Q&A)
 
+Title: The asyncio community, one year later
+Subtitle: EuroPython 2015, Bilbao
+
+Victor Stinner
+REDHAT
+
+Victor Stinner
+==============
+
+* Python core developer since 2010
+* Senior Software Engineer at Red Hat
+* Port OpenStack to Python 3
+* Working remotely from south of France
+
+Agenda
+======
+
+* asyncio
+* asyncio clients
+* asyncio servers
+* asyncio other libraries
+* benchmark
+* trollius
+
 asyncio launch
 ==============
 
 * Python 3.4: March 2014
 * Almost naked: very few libraries
+* Feature level: the socket module
 
 asyncio moved to Github
 =======================
@@ -21,27 +46,25 @@ Discussion
 * python-tulip mailing list (Google Group)
 * #asyncio IRC channel on the Freenode network
 * Python bug tracker (bugs.python.org)
+* More and more conferences on asyncio!
 
 aiohttp
 =======
 
-* Most famous and successful project
-* HTTP Client and HTTP Server.
-* (HTTPS support)
-* Server WebSockets and Client WebSockets out-of-the-box
+* Most famous and successful asyncio library
+* HTTP Client and HTTP Server
+* HTTPS support
+* Client and Server WebSockets out-of-the-box
 * Web-server has Middlewares and pluggable routing
 * https://aiohttp.rtfd.org
 
-* aiohttp: http client and server infrastructure for asyncio
-* aiohttp is battle tested
+aiohttp client Hello World::
 
-Client::
-
-    @asyncio.coroutine
-    def fetch_page(url):
-        response = yield from aiohttp.request('GET', url)
-        assert response.status == 200
-        return (yield from response.read())
+@asyncio.coroutine
+def fetch_page(url):
+    response = yield from aiohttp.request('GET', url)
+    assert response.status == 200
+    return (yield from response.read())
 
 SQL drivers
 ===========
@@ -49,47 +72,48 @@ SQL drivers
  * MySQL: aiomysql
  * PostgreSQL: aiopg (based on psycopg2)
 
-::
+aiopg example::
 
-    dsn = 'dbname=aiopg user=aiopg password=passwd host=127.0.0.1'
+dsn = ('dbname=aiopg host=127.0.0.1 '
+       'user=test password=xxx')
 
-    @asyncio.coroutine
-    def go():
-        pool = yield from aiopg.create_pool(dsn)
-        with (yield from pool.cursor()) as cur:
-            yield from cur.execute("SELECT 1")
-            ret = yield from cur.fetchone()
-            assert ret == (1,)
+@asyncio.coroutine
+def go():
+    pool = yield from aiopg.create_pool(dsn)
+    with (yield from pool.cursor()) as cur:
+        yield from cur.execute("SELECT 1")
+        ret = yield from cur.fetchone()
+        assert ret == (1,)
 
 ORM
 ===
 
- * peewee ORM: peewee-async
+ * peewee-async: peewee ORM async
  * aiopg.sa: SQLAlchemy functional SQL layer based on aiopg
 
 Key-value store
 ===============
 
- * memcached: aiomemcache, minimal memcached client
+ * memcached: aiomemcache
  * redis: aioredis
  * redis: asyncio-redis
 
 aioredis::
 
-    # No pipelining
-    @asyncio.coroutine
-    def wait_each_command():
-        foo = yield from redis.get('foo')
-        bar = yield from redis.incr('bar')
-        return foo, bar
+# No pipelining
+@asyncio.coroutine
+def wait_each_command():
+    foo = yield from redis.get('foo')
+    bar = yield from redis.incr('bar')
+    return foo, bar
 
-    # Sending multiple commands and then gathering results
-    @asyncio.coroutine
-    def pipelined():
-        get = redis.get('foo')
-        incr = redis.incr('bar')
-        foo, bar = yield from asyncio.gather(get, incr)
-        return foo, bar
+# Sending multiple commands and then gathering results
+@asyncio.coroutine
+def pipelined():
+    get = redis.get('foo')
+    incr = redis.incr('bar')
+    foo, bar = yield from asyncio.gather(get, incr)
+    return foo, bar
 
 NoSQL
 =====
@@ -100,49 +124,38 @@ NoSQL
 Clients
 =======
 
-Unsorted:
+ * DNS: aiodns (assync DNS resolver)
+ * IRC: bottom
+ * IRC: irc3
+ * SSH: AsyncSSH
+ * XMPP (Jabber): slixmpp (fork of SleekXMPP)
 
-  * AMQP: aioamqp: AMQP implementation using asyncio (Used by RabbitMQ)
-  * AMI: panoramisk, a library to play with Asterisk's protocols: AMI and FastAGI
-  * DNS: aiodns: Async DNS resolver
-  * ElasticSearch: aioes: ElasticSearch client library
-  * Etcd: aioetcd: Coroutine-based etcd client
-  * Google Hangouts: hangups: Client for Google Hangouts
-  * SSH: AsyncSSH: SSH client and server implementation
-  * XMPP (Jabber): slixmpp, SleekXMPP (XMPP Library) fork using asyncio, for poezio
-
-Clients
-=======
-
- * Asterisk: panoramisk, a library based on python’s asyncio to play with asterisk's manager
- * !ElasticSearch: aioes, client library
- * IRC: irc3, plugable irc client library based on python's asyncio
- * IRC: bottom, asyncio-based rfc2812-compliant IRC Client
- * XMPP (Jabber): slixmpp, SleekXMPP (XMPP Library) fork using asyncio, for poezio
+ * AMI: panoramisk (AMI and FastAGI)
+ * AMQP: aioamqp
+ * ElasticSearch: aioes
+ * Etcd: aioetcd
+ * Google Hangouts: hangups
 
 Websockets
 ==========
 
- * aiohttp.web: a Flask-like API to build quickly HTTP applications, made by the creators of aiohttp.
+ * aiohttp.web: a Flask-like API
  * AutobahnPython: WebSocket and WAMP framework
- * websockets: Websockets library
- * WebSocket-for-Python: another websocket library
+ * websockets
+ * WebSocket-for-Python
 
 Web frameworks
 ==============
 
- * aiopyramid: Tools for running pyramid using asyncio.
- * aiowsgi: minimalist wsgi server using asyncio
- * API hour: Write efficient network daemons (HTTP, SSH, ...) with ease.
- * AutobahnPython: !WebSocket and WAMP framework
- * interest: event-driven web framework on top of aiohttp/asyncio.
- * muffin: A web framework based on Asyncio stack (early alpha)
- * nacho: web framework
- * Pulsar: Event driven concurrent framework for python. With pulsar you can write asynchronous servers performing one or several activities in different threads and/or processes.
- * rainfall: another web framework
- * Vase: web framework
- * websockets: Websockets library
- * WebSocket-for-Python: another websocket library
+ * aiopyramid
+ * aiowsgi
+ * API hour
+ * interest
+ * muffin
+ * nacho
+ * Pulsar
+ * rainfall
+ * Vase
 
  Others: ...
 
@@ -167,59 +180,52 @@ aiohttp web server::
 Integration with other application libraries
 ============================================
 
- * aioamqp: AMQP implementation using asyncio
  * gunicorn: gunicorn has gaiohttp worker built on top of aiohttp library
 
 Run asyncio on top of
 =====================
 
- * eventlet: aiogreen, asyncio API implemented on top of eventlet
- * gevent: aiogevent, asyncio API implemented on top of gevent
+ * GLib: gbulb
+ * Qt: Quamash
+ * Tornado: builtin asyncio and trollis support
+ * ZeroMQ: Zantedeschia
+ * ZeroMQ: aiozmq
+ * eventlet: aioeventlet
+ * eventlet: greenio
+ * gevent: aiogevent
+ * gevent: tulipcore
+ * libuv: aiouv
 
-Adapters for other event loops
-==============================
+Unit tests
+==========
 
-Some people have already written adapters for integrating asyncio with other
-async I/O frameworks.
-
- * eventlet: greenio, Greenlets support for asyncio (PEP 3156)
- * gevent: tulipcore, run gevent code on top of asyncio, alternative gevent core loop
- * GLib: gbulb, event loop based on GLib
- * libuv: aiouv, an event loop implementation for asyncio based on pyuv
- * Qt: Quamash, implementation of the PEP 3156 Event-Loop with Qt.
- * Tornado has experimental asyncio support built right into it.
- * ZeroMQ: aiozmq, ZeroMQ integration with asyncio
- * ZeroMQ: Zantedeschia, experimental alternative integration between asyncio and ZeroMQ sockets.
+ * aiotest: validate an implementation of asyncio
+ * asynctest: for unittest
+ * pytest-asyncio: for pytest
 
 Misc
 ====
 
- * aiocron: Crontabs for asyncio
- * aiomas: A library for multi-agent systems and RPC based on asyncio
- * aiotest: test suite to validate an implementation of the asyncio API
- * aioprocessing: A Python 3.3+ library that integrates the multiprocessing module with asyncio
  * blender-asyncio: Asyncio Bridge for Blender Python API
  * ipython-yf:  An ipython extension to make it asyncio compatible
- * aiogearman: asyncio gearman support. Gearman provides a generic application framework to farm out work to other machines or processes that are better suited to do the work.
- * Serial port using the serial module, see using serial port in python3 asyncio at Stackoverflow, serial.Serial can be registered with loop.add_reader().
 
-Libraries
-=========
-
- * aiofiles: File support for asyncio
- * aiodns: Async DNS resolver
- * aiorwlock: Read write lock for asyncio.
- * aioutils: Python3 Asyncio Utils, Group (like gevent.pool.Group), Pool (like event.poo.Pool), Bag and OrderedBag.
+ * aiocron: Crontab
+ * aiodns: async DNS resolver
+ * aiofiles: async disk I/O
+ * aiomas: multi-agent systems
+ * aioprocessing: multiprocessing with asyncio
+ * aiorwlock: Read-write locks
+ * aioutils
  * tasklocals: Task-local variables
 
 API-Hour benchmark
 =================
 
-* Django, Flask, API-Hour
+* Django, Flask, API-Hour (asyncio)
 * Round 5: 50 simultaneous connections with wrk
-* between 3000 and 3600 requests/second for API-Hour (asyncio)
-* between 600 and 628 requests/second for Django and Flask
-* All benchmarks at http://blog.gmludo.eu/
+* API-Hour: between 3000 and 3600 req/s
+* Django, Flask: between 600 and 628 req/s
+* API-Hour handles around 5x more requests per second
 
 API-Hour benchmark
 =================
@@ -239,14 +245,9 @@ Trollius
 
 * Trollius is the Python 2 port of asyncio
 * Work on Python 2.6 - 3.6
-* Trollius 2.0
-
-Links
-=====
-
-* http://asyncio.org/: Libraries, Docs, Talks, Tutorials, Blogs
-* ThirdParty wiki page
-* https://github.com/python/asyncio/wiki/ThirdParty
+* Trollius 2.0 now based on Git, released last week
+* Only a few libraries are compatible with Trollius
+* (ex: aiohttp doesn't work with trollius)
 
 How can you help?
 =================
@@ -258,10 +259,12 @@ How can you help?
   smtplib, smtpd, telnetlib, xmlrpc, etc.
 * Interoperability with Twisted
 
-Questions
-=========
+Links & Questions
+=================
 
-
+* http://asyncio.org/: Libraries, Docs, Talks, Tutorials, Blogs
+* ThirdParty wiki page
+* https://github.com/python/asyncio/wiki/ThirdParty
 
 Sources of photos
 =================
@@ -279,6 +282,4 @@ Sources of photos
 * https://www.flickr.com/photos/pankseelen/5468062766/
 * https://www.flickr.com/photos/pankseelen/5470825013/in/photostream/
 * https://www.flickr.com/photos/pankseelen/5468062632/in/photostream/
-
-
 
