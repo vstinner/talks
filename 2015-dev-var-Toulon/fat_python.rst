@@ -24,7 +24,7 @@ Optimiser ::
         return len("abc")
 
 
-== On est bon ?
+== Facile !
 
 Version optimisée ::
 
@@ -83,5 +83,45 @@ Code::
 
 == AST
 
+Arbre syntaxique abstrait (Abstract Syntax Tree, AST).
+
 Code Python => AST => Bytecode
+
+
+== AST
+
+len("abc") as AST::
+
+    Call(func=Name(id='len', ctx=Load()),
+         args=[Str(s='abc')])
+
+== AST transformer
+
+Code::
+
+    class Optimizer(ast.NodeTransformer):
+        def visit_Call(self, node):
+            return ast.Num(n=3)
+
+== Optimisations
+
+* Call pure builtins
+* Loop unrolling
+* Constant propagation
+* Constant folding
+* Replace builtin constants
+* Dead code elimination
+* Copy builtin functions to constants
+
+
+== More optimisations
+
+* Function inlining
+
+
+= Questions
+
+Merci
+
+https://faster-cpython.readthedocs.org/fat_python.html
 
