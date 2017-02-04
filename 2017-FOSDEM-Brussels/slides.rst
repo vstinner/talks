@@ -1,101 +1,122 @@
-https://fosdem.org/2017/schedule/event/python_stable_benchmark/
-
++++++++++++++++++++++++++++++
 How to run a stable benchmark
++++++++++++++++++++++++++++++
 
-Goal
-====
+Victor Stinner
+==============
 
-* Take a decision on a tiny micro-optimization
-* Does my patch make Python:
+* CPython core developer since 2010
+* Working for Red Hat on OpenStack
+* Fan of optimization, profiling and benchmarks!
 
-  * Faster
-  * Slower
-  * **(result is not significant)**
-
-* What are the bounds of "not significant"?
-
-Problem
-=======
-
-* Starting point: optimize x+y (BINARY_ADD) where x and y are integers
-* https://bugs.python.org/issue21955 opened in 2014, 14 patches, many
-  authors and concurrent implementations
-* I proposed my own patch in 2014
-* I started to run the *The Grand Unified Python Benchmark Suite*
-* I ran again benchmarks in a "rigorous" mode, slower
-* "the results look unreliable"
-* "telco is such a benchmark (although it's very unstable)"
-* "a very interesting table (...) shows that some benchmarks are indeed very
-  unstable."
-
-Microbenchmarks
-===============
-
-* Macrobenchmarks and microbenchmarks
-* My own definition: a microbenchmark measures a single function
-  which takes less than 1 ms. In CPython, it's common that timings are close to
-  100 ns (only 300 instructions on a 3 GHz CPU)
-* The more short the timing is, the more issues you will start to see
-* Microbenchmarks are commonly used in CPython to justifiy a "micro
-  optimization"
-
-System
+Agenda
 ======
 
-* I found a great "trick" on the Internet: isolate CPUs on Linux
-* Another trick: "NOHZ" mode, disable any kind of interruption on a process
-  when only one process is running on a CPU
-* CPU pinning ensures that the process doesn't migrate between CPUs
-* kernel command line: isocpus=3,7
-* check /sys/devices/system/cpu/isolated
-* be careful with NUMA and HyperThreading, check ``lscpu --all --extended``
+* What the is problem?
+* Causes of benchmark instabilities
+* perf module
+* CPython benchmarks
 
-System: test
+What is the problem?
+====================
+
+Optimization 1: BINARY_ADD
+--------------------------
+
+* In 2014, optimization for int + int operator
+* 14 patches
+* multiple authors
+* is it worth it?
+* *The Grand Unified Python Benchmark Suite*
+* some benchmarks were slower, some were faster, but **randomly**
+* "unreliable" and "unstable" benchmarks?
+
+Optimization 2: FASTCALL
+------------------------
+
+* April 2014, I experimented a change to avoid temporary tuple
+  to call functions
+* Promising results: many builtin functions 20-50% faster!
+* *But* some benchmarks were slower
+* Bisection to reduce a 10.000 lines patch to... a patch only adding a new
+  function, but don't call it!?
+* Few benchmarks still XXX% slower
+
+Requirement
+-----------
+
+* Reproductible benchmark results on the same computer
+* Unreliable benchmarks => risk of taking a bad decision?
+* Patch makes Python faster, slower or... is not significant?
+
+Causes of benchmark instabilities
+=================================
+
+* Isolated CPUs
+* NOHZ_FULL
+* Code placement and PGO
+
+  - ASLR
+  - Randomized Python hash function
+  - Environment variables
+  - Command line arguments
+  - etc.
+
+* Average
+* perf project
+
+System noise
 ============
 
-Microbenchmark on an idle system (without CPU isolation)::
+* Applications and the kernel share resources like CPU, memory and storage
+* CPU-bound microbenchmark::
 
     $ python3 -m timeit 'sum(range(10**7))'
-    10 loops, best of 3: 229 msec per loop
 
-Busy system (high I/O)::
+* Idle system: **229** msec
+* Busy system, run multiple times::
 
-    $ python3 -m timeit 'sum(range(10**7))'
-    10 loops, best of 3: 372 msec per loop
+    python3 -c 'while True: pass'
 
-=> 56% slower
+* High system load: **372** msec (1.6x slower, +62%)
 
-System: test
-============
 
-Microbenchmark on an idle system (without CPU isolation)::
+Isolated CPUs
+-------------
 
-    $ python3 -m timeit 'sum(range(10**7))'
-    10 loops, best of 3: 229 msec per loop
+* Linux allows to "isolate" CPUs: not schedule processes on them
+* Enter GRUB, add ``isolcpus=3`` to the Linux command line
+* Check /sys/devices/system/cpu/isolated
+* Run script on CPU 3::
 
-Busy system (high I/O) but CPU isolation::
+    taskset -c 3 python3 script.py
 
-    $ taskset -c 1,3 python3 -m timeit 'sum(range(10**7))'
-    10 loops, best of 3: 230 msec per loop
+* Idle system: **229** msec
+* High system load: **372** msec (1.6x slower, +62%)
+* High system load, isolated CPU: **230** msec (same speed!)
+* Isolated CPUs are not impacted by other applications!
+* In htop, see all CPUs busy in htop except of isolated CPUs
 
-=> I/O has no effect on the benchmark!
+NOHZ_FULL and rcu_nocbs
+=======================
 
+* nohz_full=3: when only 0 or 1 application runs on CPU 3, disable all
+  interruptions of this CPU
+* rcu_nocbs=3: avoid running kernel code  on the CPU 3
+* Be aware of NUMA and HyperThreading: ``lscpu --all --extended``
+
+htop
+====
+
+* SCREENSHOT
 
 Deadcode
 ========
 
-* April 2014, I experiment a change to avoid temporary tuple to call functions
-* Promising results: many builtin functions between 20 and 45% faster!
-* Giant FASTCALL patch, but slower in some cases
-* Simpler patch: still slower
-* Patch only adding code: still slower... wait, what?
-
-Deadcode
-========
-
+* I reduced my 10.000 lines patch to a patch adding an unused function
 * Adding a C function makes Python slower
-* Adding a C function with an empty body makes Python faster
-* WTF again?
+* Modify the added function to remove its body: Python becomes faster
+* WTF??
 
 
 Deadcode: perf
@@ -548,7 +569,43 @@ perf system tune
     ...
     Power supply: the power cable is plugged
 
+
+CPython benchmarks
+==================
+
+* Results published at http://speed.python.org/
+* Results on the 2016
+* Nice speedup in 2016, single example:
+  <picture of telco>
+* https://github.com:python/performance
+* https://github.com:haypo/perf.git
+
+Questions?
+==========
+
+Questions?
+
+https://github.com:haypo/perf.git
+
+Bonus slides
+============
+
+Microbenchmarks
+---------------
+
+* Macrobenchmarks and microbenchmarks
+* My own definition: a microbenchmark measures a single function
+  which takes less than 1 ms. In CPython, it's common that timings are close to
+  100 ns (only 300 instructions on a 3 GHz CPU)
+* The more short the timing is, the more issues you will start to see
+* Microbenchmarks are commonly used in CPython to justifiy a "micro
+  optimization"
+
+
+
 ==
+
+https://fosdem.org/2017/schedule/event/python_stable_benchmark/
 
 How to run a stable benchmark
 
