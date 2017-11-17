@@ -238,7 +238,7 @@ Migration to Unicode step-by-step
 Programming with Unicode book
 =============================
 
- * github.com/haypo/unicode_book
+ * github.com/vstinner/unicode_book
  * CC BY-SA license
  * Encodings, operating systems, programming languages, libraries
  * Good practices, Unicode issues
@@ -306,5 +306,5 @@ Questions?
 ==========
 
  * Bye bye Unicode errors!
- * github.com/haypo/unicode_book
+ * github.com/vstinner/unicode_book
 

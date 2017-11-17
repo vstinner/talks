@@ -7,7 +7,7 @@ Titre
 Moi
 
 * Core developer Python depuis 2010
-* github.com/haypo
+* github.com/vstinner
 * bitbucket.org/haypo
 * Enovance
 
