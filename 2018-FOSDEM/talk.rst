@@ -3,28 +3,61 @@ Satursday: 11:00-11:50; 45 min?
 Slides
 ======
 
+First slide
+-----------
+
 Python 3: 10 years later
 Looking back at Python evolutions of the last 10 years
 
+Intro
+-----
+
+* Victor Stinner
+* CPython core developer since 2010
+* Work on Python and OpenStack for Red Hat
+* Very happy user of Fedora and (g)vim!
+
 Bad
----
+===
+
+Creation of Python 3000
+-----------------------
+
+* PEP 3000: "Python 3000" created in 2006
+* Fix "Python warts": unicode mess; long vs. int; two class systems; relatve imports; int division vs. foat division; comparisons; nonlocal variables; etc.
+* Don't break everything, only acknowledged warts
+* Don't fall into the Perl6 trap
+* Don't reimplement the interpreter from scratch
+* Plan end of life for Python 2
+
+(Source: Guido's talk at PyCascades 2018)
+
+First migration attempt
+-----------------------
+
+* Run 2to3 to port your whole code base at once, you're done!
+* Unexpected #1: dropping Python 2 is a **no-go**, modules authors care of users
+  still running Python 2
+* You first need that **all** your dependencies are Python 3 compatible
+* Unexpected #2: Python 2.7 was heavily used in production and companies
+  had very large code bases with many dependencies
+* 2to3 or adding manually Python 3 support required a lot of changes:
+  risk of regression
+
+Technical debt dialog
+---------------------
+
+* Boss: - Why should I pay you to add Python 3 support?
+* You: - All these new cool Python 3 features!
+* Boos: - Ok. Can we use these features?
+* You: Well.... since we still have to support Python 2... no.
+* Boss: - So what?
 
 * Initial plan failed badly: "port all Python code at once", 2to3
 * First failed attempt to migrate to Python 3 "at once"
 
-  * Run 2to3 at once: drop Python 2 support, forget the past
-  * Unexpected fact #1: Python 2.7 is heavily used in production and companies
-    have large code bases
-  * Unexpected fact #2: Dropping Python 2 support is **no-go**, module authors
-    don't want to loose more than 90% of their users
-  * #3: Keeping Python 2 compatibility means that new shiny features of
-    Python 3... cannot be used... Spend one week or one month to port,
-    fix regressions, be the one responsible to any future regression
-    for no immediate gain
   * One decided Python3 branch in the SCM repository, or even a fork:
     painful to keep up to date
-  * Bad: 2to3: "drop Python2 support at once", don't work when you have
-    dependencies.
 
 * Growing populary of the Python programming language
 
@@ -33,10 +66,8 @@ Bad
   * Favorite programming language used as the first language to learn
     programming
 
-
-
 VERY BAD
---------
+========
 
 * Python 2.6: heavy used of six, unittest2, limit Python3 features
 * Twisted, Mercurial and PyPy
@@ -57,18 +88,13 @@ VERY BAD
   * We love bytes
   * Locales are hard
 * Python 3.2 required six.u("unicode")
-* Cost of Migration, technical debt
-
-  * Add Python3 support: no immediate gain
-  * Regressions
-
 * Python2 is better: right ; Python 3 is better: right
 
   * Python2: stable, works
   * Python3: better language, more features
 
 Good
-----
+====
 
 * More and more backports: subprocess32
 * At Pycon US 2014, Guido van Rossum announced that the Python
@@ -94,12 +120,6 @@ Good
   * Port dependencies one by one: slow process, write a PR, get the PR merged,
     wait for a release, update dependency min version. Wait... what is the
     author doesn't answer (MySQL-python)? Fork? Fork under a different name?
-  * MySQL-python => mysqlclient // PyMySQL: new pure Python client
-  * python-ldap => ldap3 and pyldap
-  * PIL => Pillow
-  * (abandonned) mox => mock3
-  * pydot3?
-  * dnspython => dnspython3 -- merged back into dnspython?
 * Python problem #1 now fixed: packaging
 * Python 3 is better
 * Python 3.3, six
@@ -131,7 +151,7 @@ Good
 
 
 Very good
----------
+=========
 
 * Bugs that won't be fixed in Python 2 anymore
 
@@ -179,13 +199,8 @@ Very good
   release. Break things, one by one :-)
 
 
-
-RAW                             notes
-=====================================
-
-BIG TOPICS:
-
-
+Misc
+====
 
 Timeline
     XXX draw a graphic
