@@ -107,6 +107,3 @@ Outro
        future health of Python.” – Guido van Rossum (May 2018)
 
     "Come for the Language, Stay for the Community" – Brett Cannon
-
-Photos
-   https://www.flickr.com/photos/rbh/12490872423/
