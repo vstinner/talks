@@ -1,4 +1,6 @@
-Victor Stinner talks since 2005.
+Victor Stinner's talks since 2005.
+
+https://vstinner.readthedocs.io/talks.html
 
 LibreOffice colors:
 
