@@ -34,48 +34,52 @@ Subinterpreters Use Cases
 -------------------------
 
 * mod_wsgi: handle HTTP requests
-* weechat pluggins (IRC client written in C)
+* weechat plugins (IRC client written in C)
 
-Case A: Embed don't leak memory in Py_EndInterpreter()
-------------------------------------------------
+Case A: Embedded Python must release memory at exit
+---------------------------------------------------
 
 * Real world use cases: Python is already embedded
 * Check for memory leaks at exit (ex: Valgrind)
+* Py_Finalize() should release all memory allocations done by Python.
+* It may be even more important for Py_EndInterpreter()
 * https://bugs.python.org/issue1635741
 
-Case A: Pluggin use case
-------------------------
+Case A: Plugin use case
+-----------------------
 
-* Use subinterpreters for pluggins
+* Use subinterpreters for plugins
 * IRC client written in C
-* Pluggin A uses Python
-* Pluggin B also uses Python
-* Pluggins are not aware of each others
-* No leak memory when you unload a pluggin
+* Plugin A uses Python
+* Plugin B also uses Python
+* Plugins are not aware of each others
+* Don't leak memory when a plugin is unloaded
 
 Case B: Run interpreters in parallel
 ------------------------------------
 
-* multiprocessing
-* Can be more efficient or more convinient for some specific use cases
-* Machine Learning.
+* multiprocessing use cases.
+* Distribute Machine Learning.
 
-Case B: Single process is simpler
----------------------------------
+Case B: Single process is more convenient and efficient
+-------------------------------------------------------
 
-* Admin tools are more convenient with 1 process than N processes
-* Some APIs are more convenient in the same process
+* Admin tools are more convenient with 1 process than with N processes
+* Some APIs are more convenient in the same process.
 * On **Windows**, **spawn a thread** is faster than spawn a process.
   (Windows doesn't have fork.)
 * On **macOS**, multiprocessing became slower with spawn, rather than fork or
   forkserver
 
-Case B: Run subinterpreters in parallel
----------------------------------------
+Case B: Don't share any Python object
+--------------------------------------
 
-* **Don't share any Python objects** between interpreters
-* Even immutables objects
-* Problem: concurrent access on **PyObject.ob_refcnt**
+* **Don't share any Python object** between interpreters. Even immutables
+  objects.
+* Problem: concurrent access on **PyObject.ob_refcnt**.
+* Adding a **mutex** on ob_refcnt would kill performance.
+* **Atomic operation** on ob_refcnt would be an obvious performance bottleneck:
+  pressure on the same CPU cacheline for common objects like None, 1, ().
 * Solution: don't share objects
 
 Drawbacks of subinterpreters
@@ -105,23 +109,18 @@ Heap types
 Work already done
 =================
 
-Per-interpreter free lists (bpo-40521)
---------------------------------------
+Per-interpreter free lists
+--------------------------
 
-* MemoryError
-* asynchronous generator
-* context
-* dict
 * float
-* frame
-* list
-* slice
-* tuple
+* tuple, list, dict, slice
+* frame, context, asynchronous generator
+* MemoryError
 
-Per-interpreter singletons (bpo-40521)
---------------------------------------
+Per-interpreter singletons
+--------------------------
 
-* small integer ([-5; 256] range) (bpo-38858)
+* small integer ([-5; 256] range)
 * empty bytes string singleton
 * empty Unicode string singleton
 * empty tuple singleton
@@ -132,31 +131,31 @@ Per-interpreter singletons (bpo-40521)
 Per-interpreter...
 -------------------
 
-* slice cache (bpo-40521).
-* pending calls (bpo-39984).
-* type attribute lookup cache (bpo-42745).
-* interned strings (bpo-40521).
-* identifiers: ``_PyUnicode_FromId()`` (bpo-39465)
+* slice cache
+* pending calls
+* type attribute lookup cache
+* interned strings: ``PyUnicode_InternInPlace()``
+* identifiers: ``_PyUnicode_FromId()``
 
 Per-interpreter module states
 -----------------------------
 
-* ast (bpo-41796)
-* gc (bpo-36854)
-* parser (bpo-36876)
-* warnings (bpo-36737 and bpo-40521)
+* ast
+* gc
+* parser
+* warnings
 
 Fix daemon threads crashes
 --------------------------
 
 * Random crashes at Python exit when using daemon threads
-* tstate_must_exit() function
-* take_gil() calls tstate_must_exit() in 3 places
+* take_gil() now checks in 3 places if the current thread must exit
+  immediately (if Python exited).
+* Don't read any Python internal structure after Python exited.
 
-PoC in May 2020
----------------
+Proof of concept (May 2020)
+---------------------------
 
-* It scales with the number of CPUs!
 * Same factorial function on 4 **CPUs**
 * Sequential: **1.99 sec** +- 0.01 sec (ref)
 * Threads: **3.15 sec** +- 0.97 sec (1.5x slower)
@@ -185,8 +184,9 @@ Remove static types from the C API
 -----------------------------------
 
 * Replace ``&PyLong_Type`` with ``PyLong_GetType()``
-* Maybe break the C API: need a PEP in this case
-* Guido's idea: use ``&PyHeapType.ht_type``
+* Guido's idea: use ``&PyHeapType.ht_type`` for ``&PyLong_Type``.
+* Need a PEP if the C API is broken.
+* https://bugs.python.org/issue40601
 
 None singleton
 --------------
@@ -201,7 +201,7 @@ Get tstate from TLS
 
 * Performance issue
 * _PyThreadState_GET()
-* C11 _Thread_local and <threads.h> thread_local
+* C11 _Thread_local and <threads.h> **thread_local**
 * x86: single MOV instruction using FS register
 * Use **volatile** keyword if C11 is not supported
 * Function call at the ABI level for extensions
@@ -239,3 +239,6 @@ Q & A
 =====
 
 * Ask your questions :-)
+* ``./configure --with-experimental-isolated-subinterpreters``
+* ``#ifdef EXPERIMENTAL_ISOLATED_SUBINTERPRETERS``
+
