@@ -64,6 +64,12 @@ Add to the limited C API:
 
 * Don't return borrowed references. Exception: ``Py_GetConstantBorrowed()``
   for backward compatibility.
+* Return -1 on error. Return 0 on success. Optional: return 1 if found.
+  Example: `PyDict_GetItemRef()`.
+
+## Performance
+
+* Abstraction should not come with a major performance overhead.
 
 ## Argument Clinic
 
@@ -81,7 +87,7 @@ Support targetting the limited C API:
 
 Limited C API:
 
-* nanobind: default
+* nanobind: 100% feature coverage on Python 3.12.
 * Cython: opt-in build mode
 * PyO3: opt-in build mode
 
@@ -133,6 +139,10 @@ Exception:
 * Example: `Py_DECREF()` calls `_Py_Dealloc()` which is part of the stable ABI
   ("ABI only" function).
 
+## Add `_testlimitedcapi`
+
+Split C API tests: add `_testlimitedcapi` built with the limited C API.
+
 ## Limited C API in Python 3.13
 
 * Debug build `Py_TRACE_REFS` is now compatible with the limited C API
@@ -140,3 +150,17 @@ Exception:
 * Argument Clinic supports the limited C API.
 * PEP 737: API to format a type name (fully qualified name).
 * Build 16 extensions with the limited C API.
+* Split C API tests: add `_testlimitedcapi`
+
+## TODO
+
+* PEP 741 "Python Configuration C API".
+* PEP 703 "Free Threading": add support for the limited C API somehow.
+* Cython: enhance limited C API support.
+* Enhance abi3audit tool which emits false alarms.
+  https://github.com/trailofbits/abi3audit
+* PyO3: use the limited C API by default.
+  https://github.com/trailofbits/abi3audit
+* API for PyFrameObject for Cython, greenlet, gevent and eventlet.
+* API for PyThreadState for Cython.
+* Design a migration path away from PyTypeObject members direct access.
