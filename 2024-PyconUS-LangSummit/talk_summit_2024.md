@@ -209,7 +209,6 @@ Split C API tests: add `_testlimitedcapi` built with the limited C API.
 * Enhance abi3audit tool which emits false alarms.
   https://github.com/trailofbits/abi3audit
 * PyO3: use the limited C API by default.
-  https://github.com/trailofbits/abi3audit
 * API for PyFrameObject for Cython, greenlet, gevent and eventlet.
 * API for PyThreadState for Cython.
 * Design a migration path away from PyTypeObject members direct access.
